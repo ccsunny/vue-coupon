@@ -8,15 +8,20 @@
                         <p>{{item.USER_NAME}}</p>
                         <p>{{item.ADDTIME}}</p>
                     </div>
-                    <img class="fx" src="../../assets/img/share/share.png">
+                    <img class="fx" src="../../assets/img/share/share.png" :data-clipboard-text="item.CONTENT" @click="copy">
                 </div>
                 <p class="title">{{item.TITLE}}</p>
                 <p class="int">{{item.CONTENT}}</p>
                 <div class="bottom">
                     <ul>
-                        <li v-for="(goods,g) in item.tbkgoodsList" :key="g">
-                            <img class="coupon" v-lazy="goods.imgUrl || goods.PICT_URL" v-preview="goods.imgUrl || goods.PICT_URL" preview-title-enable="true" preview-nav-enable="true"/>
-                            <span v-if="!goods.imgUrl">￥{{goods.ZK_FINAL_PRICE}}</span>                    
+                        <li v-for="(goods,g) in item.tbkgoodsList" :key="g" v-show="goods.GOODSITEMTYPE == 0">
+                            <img class="coupon" v-lazy="goods.imgUrl" v-preview="goods.imgUrl" preview-title-enable="true" preview-nav-enable="true"/>
+                        </li>
+                        <li v-for="(goods,g) in item.tbkgoodsList" :key="g" v-show="!goods.GOODSITEMTYPE == 0 && !goods.NUM_IID == ''">
+                            <router-link :to="goods.GOODSITEMTYPE == 3 ? `/jingDetail?goods_id=${goods.NUM_IID}` : `/taoDetail?NUM_IID=${goods.NUM_IID}`">
+                                <img class="coupon" v-lazy="goods.PICT_URL"/>
+                                <span>￥{{goods.ZK_FINAL_PRICE}}</span>
+                            </router-link>                  
                         </li>
                     </ul>
                 </div>
@@ -28,6 +33,8 @@
 <script>
 import { Lazyload } from 'mint-ui';
 import { mapGetters } from 'vuex'
+import { Toast } from "mint-ui"
+import Clipboard from 'clipboard'
 import Baseline from '@/common/Baseline.vue'
 export default {
     data () {
@@ -50,7 +57,21 @@ export default {
     methods: {
         imgError(item) {
             item.img = require('../../assets/img/share/logo1.png');
-        }
+        },
+        copy: function () {
+            let clipboard = new Clipboard('.fx')
+            clipboard.on('success', e => {
+              Toast("复制成功");
+              // 释放内存
+              clipboard.destroy()
+            })
+            clipboard.on('error', e => {
+              // 不支持复制
+              Toast("复制失败");
+              // 释放内存
+              clipboard.destroy()
+            })
+        }
     }
 }
 </script>
@@ -112,7 +133,7 @@ export default {
             ul{
                 li {
                     width: 32.6%;
-                    height: 30vw;
+                    height: 32vw;
                     background-color: #ccc;
                     float: left;
                     position: relative;

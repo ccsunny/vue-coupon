@@ -1,10 +1,12 @@
 <template lang="html">
   <div class="wrap">
     <div class="header">
-      <div class="mint-searchbar-inner">
-        <i class="mintui mintui-search"></i>
-        <input type="search" placeholder="粘贴宝贝标题，先领劵再购买" class="mint-searchbar-core">
-      </div>
+      <router-link to="/search">
+        <div class="mint-searchbar-inner">
+          <i class="mintui mintui-search"></i>
+          <input type="search" placeholder="粘贴宝贝标题，先领劵再购买" class="mint-searchbar-core">
+        </div>
+      </router-link>
     </div>
     <v-aside />
     <mt-tabbar/>

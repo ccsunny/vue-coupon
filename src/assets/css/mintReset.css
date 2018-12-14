@@ -20,3 +20,18 @@
   font-size: 5vw;
   color: #fff;
 }
+.mint-msgbox {
+  height: 26vw;
+}
+.mint-msgbox .mint-msgbox-content {
+  height: 14vw;
+  padding: 0;
+}
+.mint-msgbox .mint-msgbox-content .mint-msgbox-message {
+  font-size: 4.5vw;
+  line-height: 14vw;
+}
+.mint-msgbox-btn {
+  font-size: 4vw;
+  line-height: 12vw;
+}

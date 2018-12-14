@@ -8,6 +8,10 @@ const Fans = resolve => require(['@/views/Fans.vue'], resolve)
 const User = resolve => require(['@/views/User.vue'], resolve)
 //首页的路由
 const More = resolve => require(['@/components/index/more/More.vue'], resolve)
+const Search = resolve => require(['@/components/search/Search.vue'], resolve)
+const SearchDetail = resolve => require(['@/components/search/searchDetail/SearchDetail.vue'], resolve)
+const TaoDetail = resolve => require(['../components/category/goodsDetail/TaoDetail.vue'], resolve)
+const JingDetail = resolve => require(['../components/category/goodsDetail/JingDetail.vue'], resolve)
 export default new Router({
   routes: [
     {
@@ -34,6 +38,26 @@ export default new Router({
       path: '/index/more',
       name: '养生百科',
       component: More,
+    },
+    {
+      path: '/search',
+      name: '搜索',
+      component: Search,
+    },
+    {
+      path: '/searchDetail',
+      name: '搜索详情',
+      component: SearchDetail,
+    },
+    {
+      path: '/taoDetail',
+      name: '淘宝详情',
+      component: TaoDetail,
+    },
+    {
+      path: '/jingDetail',
+      name: '京东详情',
+      component: JingDetail,
     },
   ]
 })

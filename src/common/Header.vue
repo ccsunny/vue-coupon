@@ -20,7 +20,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 2;
   height: 12vw;
   display: flex;
   align-items: center;
