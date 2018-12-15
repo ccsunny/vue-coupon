@@ -11,7 +11,8 @@
       </router-link>
       <img class="download" src="../assets/img/index/download.png" @click="download" />
     </div>
-    <v-swiper /> 
+    <v-swiper />
+    <v-icons /> 
     <v-review/>
     <v-banner />
     <v-everyday />
@@ -24,6 +25,7 @@
 <script>
 import { Toast } from "mint-ui"
 import Swiper from '@/components/index/Swiper.vue'
+import Icons from '@/components/index/Icons.vue'
 import Review from '@/components/index/Review.vue'
 import Banner from '@/components/index/Banner'
 import Everyday from '@/components/index/Everyday'
@@ -40,6 +42,7 @@ export default {
   },
   components: {
     'v-swiper': Swiper,
+    'v-icons': Icons,
     'v-review': Review,
     'v-banner': Banner,
     'v-everyday': Everyday,
@@ -87,7 +90,7 @@ export default {
         padding: 0;
         padding-left: 3vw;
         width: 70%;
-        height: 7vw;
+        height: 8vw;
         background: #fff;
         border-radius: 4vw;
         box-sizing: border-box;

@@ -1,7 +1,7 @@
 <template>
     <div class="share">
         <ul class="share-list">
-            <li class="list" v-for="(item,index) in getShareGoodList.shareGoodsList" :key="index">
+            <li class="list" v-for="item in getShareGoodList.shareGoodsList">
                 <div class="top">
                     <img class="logo" :src="item.USERIMGURL" @error="imgError(item)" :onerror="defaultImg"/>
                     <div class="middle">
@@ -14,10 +14,10 @@
                 <p class="int">{{item.CONTENT}}</p>
                 <div class="bottom">
                     <ul>
-                        <li v-for="(goods,g) in item.tbkgoodsList" :key="g" v-show="goods.GOODSITEMTYPE == 0">
+                        <li v-for="goods in item.tbkgoodsList" v-show="goods.GOODSITEMTYPE == 0">
                             <img class="coupon" v-lazy="goods.imgUrl" v-preview="goods.imgUrl" preview-title-enable="true" preview-nav-enable="true"/>
                         </li>
-                        <li v-for="(goods,g) in item.tbkgoodsList" :key="g" v-show="!goods.GOODSITEMTYPE == 0 && !goods.NUM_IID == ''">
+                        <li v-for="goods in item.tbkgoodsList" v-show="!goods.GOODSITEMTYPE == 0 && !goods.NUM_IID == ''">
                             <router-link :to="goods.GOODSITEMTYPE == 3 ? `/jingDetail?goods_id=${goods.NUM_IID}` : `/taoDetail?NUM_IID=${goods.NUM_IID}`">
                                 <img class="coupon" v-lazy="goods.PICT_URL"/>
                                 <span>￥{{goods.ZK_FINAL_PRICE}}</span>

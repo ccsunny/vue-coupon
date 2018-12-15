@@ -10,8 +10,9 @@ const User = resolve => require(['@/views/User.vue'], resolve)
 const More = resolve => require(['@/components/index/more/More.vue'], resolve)
 const Search = resolve => require(['@/components/search/Search.vue'], resolve)
 const SearchDetail = resolve => require(['@/components/search/searchDetail/SearchDetail.vue'], resolve)
-const TaoDetail = resolve => require(['../components/category/goodsDetail/TaoDetail.vue'], resolve)
-const JingDetail = resolve => require(['../components/category/goodsDetail/JingDetail.vue'], resolve)
+const TaoDetail = resolve => require(['@/components/category/goodsDetail/TaoDetail.vue'], resolve)
+const JingDetail = resolve => require(['@/components/category/goodsDetail/JingDetail.vue'], resolve)
+const Economize = resolve => require(['@/components/index/icons/Economize.vue'], resolve)
 export default new Router({
   routes: [
     {
@@ -58,6 +59,11 @@ export default new Router({
       path: '/jingDetail',
       name: '京东详情',
       component: JingDetail,
+    },
+    {
+      path: '/economize',
+      name: '省大牌',
+      component: Economize,
     },
   ]
 })

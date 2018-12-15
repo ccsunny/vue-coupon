@@ -61,7 +61,7 @@ export default {
       width: 80%;
       height: 7vw;
       background: #eee;
-      border-radius: 15px;
+      border-radius: 4vw;
       margin-left: 12%;
       box-sizing: border-box;
       .mintui-search {

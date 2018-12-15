@@ -15,6 +15,7 @@
                   </ul>
               </div>
               <div class="more">
+                <span>|</span>
                 <router-link to="/index/more">更多</router-link>
               </div>
             </div>
@@ -71,9 +72,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .review-container {
+  margin-top: 35vw;
  .container {
     background: #eee;
-    padding: 0 2vw;
     .marquee{
       width: 100%;
       height: 8vw;
@@ -81,7 +82,7 @@ export default {
       color: #3A3A3A;
       background-color: #fff;
       margin-top: 2vw;
-      margin-bottom: 1.5vw;
+      padding: 0 2vw;
       display: flex;
       box-sizing: border-box;
       .marquee_title{
@@ -145,10 +146,19 @@ export default {
         }
       }
       .more {
+        float: right;
         font-size: 3vw;
+        span {
+          color: #999;
+          margin-right: 1vw;
+        }
+        a {
+          color: #333;
+        }
       }
     }
     .banner {
+      border-top: 1px solid #eee;
       margin-bottom: 1.5vw;
       img {
         display: block;
