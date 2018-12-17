@@ -45,7 +45,6 @@ header {
   }
   h1 {
     font-size: 5vw;
-    font-weight: 600;
     color: #fff;
     width: 100%;
     text-align: center;

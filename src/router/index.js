@@ -13,6 +13,11 @@ const SearchDetail = resolve => require(['@/components/search/searchDetail/Searc
 const TaoDetail = resolve => require(['@/components/category/goodsDetail/TaoDetail.vue'], resolve)
 const JingDetail = resolve => require(['@/components/category/goodsDetail/JingDetail.vue'], resolve)
 const Economize = resolve => require(['@/components/index/icons/Economize.vue'], resolve)
+const NewPerson = resolve => require(['../components/index/icons/NewPerson.vue'], resolve)
+const Pinkage = resolve => require(['../components/index/icons/Pinkage.vue'], resolve)
+const SpellGoods = resolve => require(['../components/index/icons/SpellGoods.vue'], resolve)
+const TodayRecommend = resolve => require(['../components/index/icons/TodayRecommend.vue'], resolve)
+const TaoGrab = resolve => require(['../components/index/icons/TaoGrab.vue'], resolve)
 export default new Router({
   routes: [
     {
@@ -64,6 +69,31 @@ export default new Router({
       path: '/economize',
       name: '省大牌',
       component: Economize,
+    },
+    {
+      path: '/newPerson',
+      name: '新人专区',
+      component: NewPerson,
+    },
+    {
+      path: '/pinkage',
+      name: '9.9包邮',
+      component: Pinkage,
+    },
+    {
+      path: '/spellGoods',
+      name: '拼拼好货',
+      component: SpellGoods,
+    },
+    {
+      path: '/todayRecommend',
+      name: '今日推荐',
+      component: TodayRecommend,
+    },
+    {
+      path: '/taoGrab',
+      name: '淘抢购',
+      component: TaoGrab,
     },
   ]
 })

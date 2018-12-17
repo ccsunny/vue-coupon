@@ -11,7 +11,9 @@
     <div class="tabCon">
       <ul v-for='(itemCon,index) in goodsList' v-show=" index == num">
         <li v-for='k in itemCon'>
-          <img :src="k.icon"/><span>{{k.className}}</span>
+          <router-link :to="`/searchDetail?q=${k.className}`">
+            <img :src="k.icon"/><span>{{k.className}}</span>
+          </router-link>
         </li>
       </ul>
     </div>

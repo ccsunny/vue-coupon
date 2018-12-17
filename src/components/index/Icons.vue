@@ -6,22 +6,30 @@
                 <p>每日任务</p>
             </li>
             <li>
-                <img src="../../assets/img/index/icon/icon-xin.png"/>
-                <p>新人专区</p>
+                <router-link to="/newPerson">
+                    <img src="../../assets/img/index/icon/icon-xin.png"/>
+                    <p>新人专区</p>
+                </router-link>
             </li>
             <li>
-                <img src="../../assets/img/index/icon/icon-pp.png"/>
-                <p>拼拼好货</p>
+                <router-link to="/spellGoods">
+                    <img src="../../assets/img/index/icon/icon-pp.png"/>
+                    <p>拼拼好货</p>
+                </router-link>
             </li>
             <li>
-                <img src="../../assets/img/index/icon/icon-baoyou.png"/>
-                <p>9.9包邮</p>
+                <router-link to="/pinkage">
+                    <img src="../../assets/img/index/icon/icon-baoyou.png"/>
+                    <p>9.9包邮</p>
+                </router-link>
             </li>
         </ul>
         <ul>
             <li>
-                <img src="../../assets/img/index/icon/icon-tao.png"/>
-                <p>淘抢购</p>
+                <router-link to="/taoGrab">
+                    <img src="../../assets/img/index/icon/icon-tao.png"/>
+                    <p>淘抢购</p>
+                </router-link>
             </li>
             <li>
                 <img src="../../assets/img/index/icon/icon-juhs.png"/>
@@ -34,8 +42,10 @@
                 </router-link>
             </li>
             <li>
-                <img src="../../assets/img/index/icon/icon-jinr.png"/>
-                <p>今日推荐</p>
+                <router-link to="/todayRecommend">
+                    <img src="../../assets/img/index/icon/icon-jinr.png"/>
+                    <p>今日推荐</p>
+                </router-link>
             </li>
         </ul>
     </div>

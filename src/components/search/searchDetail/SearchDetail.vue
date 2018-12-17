@@ -50,7 +50,7 @@ export default {
         getLists: function () {
             api.get("/fox/app/search/fullweb/goodsList",{
               params:{
-                USER_ID: 'EeThqo',
+                USER_ID: '123455',
                 q: this.$route.query.q,
                 page_no: 1
               }
