@@ -13,15 +13,12 @@
                     </div>
                     <p class="int">限量抢购</p>
                     <ul>
-                        <li>
-                            <img src="../../../assets/img/index/1.png"/>
-                            <p>劵后价<span>￥20</span></p>
-                            <img class="rob" src="../../../assets/img/index/icon/grab/icon-qiang.png"/>
-                        </li>
-                        <li>
-                            <img src="../../../assets/img/index/1.png"/>
-                            <p>劵后价<span>￥20</span></p>
-                            <img class="rob" src="../../../assets/img/index/icon/grab/icon-qiang.png"/>
+                        <li v-for="item in rightGoodsList">
+                            <router-link :to="`/taoDetail?NUM_IID=${item.goodsId}`">
+                                <img v-lazy="item.goodsImgUrl"/>
+                                <p>劵后价<span>￥{{item.zk_final_price}}</span></p>
+                                <img class="rob" src="../../../assets/img/index/icon/grab/icon-qiang.png"/>
+                            </router-link>
                         </li>
                     </ul>
                 </li>
@@ -32,13 +29,11 @@
                     </div>
                     <p class="int">全网热卖.实时更新</p>
                     <ul>
-                        <li>
-                            <img src="../../../assets/img/index/1.png"/>
-                            <p>劵后价<span>￥20</span></p>
-                        </li>
-                        <li>
-                            <img src="../../../assets/img/index/1.png"/>
-                            <p>劵后价<span>￥20</span></p>
+                        <li v-for="k in leftGoodsList">
+                            <router-link :to="`/taoDetail?NUM_IID=${k.goodsId}`">
+                                <img v-lazy="k.goodsImgUrl"/>
+                                <p>劵后价<span>￥{{k.zk_final_price}}</span></p>
+                            </router-link>
                         </li>
                     </ul>
                 </li>
@@ -46,54 +41,69 @@
         </div>
         <p class="taoSift">淘宝精选</p>
         <ul class="goodsCon">
-            <li>
-                <img src="../../../assets/img/index/1.png">
-                <div class="container">
-                  <div class="top">
-                    <img src="../../../assets/img/category/tm.png"/>
-                    <p>童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款</p>
-                  </div>
-                  <div class="middle">
-                    <span class="coupon">劵</span>
-                    <span class="money">￥20</span>
-                  </div>
-                  <div class="bottom">
-                    <span class="list-price">￥79</span>
-                    <del class="ac">￥99</del>
-                    <span class="sell">19999件已售</span>
-                  </div>
-                </div>
-            </li>
-            <li>
-                <img src="../../../assets/img/index/1.png">
-                <div class="container">
-                  <div class="top">
-                    <img src="../../../assets/img/category/tm.png"/>
-                    <p>童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款</p>
-                  </div>
-                  <div class="middle">
-                    <span class="coupon">劵</span>
-                    <span class="money">￥20</span>
-                  </div>
-                  <div class="bottom">
-                    <span class="list-price">￥79</span>
-                    <del class="ac">￥99</del>
-                    <span class="sell">19999件已售</span>
-                  </div>
-                </div>
+            <li v-for="m in bottomGoodsList">
+                <router-link :to="`/taoDetail?NUM_IID=${m.goodsId}`">
+                    <img v-lazy="m.goodsImgUrl">
+                    <div class="container">
+                      <div class="top">
+                        <img :src=" m.goodsType == 0 ? require('../../../assets/img/category/tb.png') : require('../../../assets/img/category/tm.png')"/>
+                        <p>{{m.goodsName}}</p>
+                      </div>
+                      <div class="bottom">
+                        <span class="sell">已售{{ m.sold_num }}件</span>
+                        <del class="ac">￥{{ m.goodsPrice }}</del>
+                      </div>
+                      <div class="middle">
+                        <div class="m-coupon">
+                            <span class="coupon">劵</span>
+                            <span class="money">￥{{m.goodsCouponInfo}}</span>
+                        </div>
+                        <span class="list-price">￥{{m.goodsDiscountPrice}}</span>
+                      </div>
+                    </div>
+                </router-link>
             </li>
         </ul>
     </div>
 </template>
 <script>
+import { Lazyload } from 'mint-ui'
+import { Toast } from "mint-ui"
+import api from '../../../api/api'
 import Header from '../../../common/Header'
 export default {
     data () {
         return {
+            rightGoodsList: [],
+            leftGoodsList: [],
+            bottomGoodsList: []
         };
     },
     components:{
         'v-header': Header,
+    },
+    mounted() {
+        this.getContent();
+    },
+    methods: {
+      getContent: function () {
+        api.get("/fox/app/home/tPanicBuyGoods",{
+          params:{
+            USER_ID: "123455",
+            pageNo: "1",
+            pageSize: "20"
+          }
+        }).then(
+          (response)=>{
+            this.rightGoodsList = response.data.content.topTpanicBuyGoodsRight
+            this.leftGoodsList = response.data.content.topTpanicBuyGoodsLeft
+            this.bottomGoodsList = response.data.content.tpanicBottomBuyGoods
+          },
+          (error)=>{
+              Toast("加载失败。。。");
+          }
+        );
+      },
     },
 }
 </script>
@@ -151,7 +161,7 @@ export default {
                         text-align: center;
                         position: relative;
                         img {
-                            width: 100%;
+                            width: 96%;
                             height: 20vw;
                         }
                         .rob {
@@ -162,7 +172,7 @@ export default {
                             height: 7vw;
                         }
                         p{
-                            font-size: 4vw;
+                            font-size: 3.5vw;
                             color: #333;
                             margin-top: 2vw;
                             span {
@@ -208,62 +218,68 @@ export default {
             .top {
               img {
                 float: left;
-                width: 10%;
+                width: 12%;
                 height: 4vw;
-                margin-right: 3%;
+                margin-right: 2%;
+                margin-top: 1vw;
               }
               p {
                 font-size: 4vw;
                 color: #333;
-                width: 85%;
+                width: 83%;
                 overflow: hidden;
                 text-overflow:ellipsis;
                 white-space: nowrap;
               }
             }
-            .middle {
-              width: 22vw;
-              height: 6vw;
-              line-height: 6vw;
-              font-size: 3vw;
-              border: 1px solid red;
-              margin-top: 2vw;
-              .coupon {
-                display: inline-block;
-                width: 26%;
-                text-align: center;
-                height: 100%;
-                background: red;
-                color: #fff;
-              }
-              .money {
-                display: inline-block;
-                width: 60%;
-                height: 100%;
-                text-align: center;
-                color: red;
-              }
-            }
             .bottom {
               margin-top: 2vw;
-              .list-price {
+              overflow: hidden;
+              .sell {
                 float: left;
-                font-size: 4vw;
-                font-weight: 600;
-                color: red;
+                font-size: 3vw;
+                color: #999;
+                margin-top: 0.5vw;
               }
               .ac {
-                float: left;
+                float: right;
                 font-size: 3.5vw;
                 color: #999;
                 margin-left: 1vw;
                 margin-top: 0.5vw;
               }
-              .sell {
-                float: right;
+            }
+            .middle {
+              height: 8vw;
+              margin-top: 2vw;
+              .m-coupon {
+                float: left;
+                width: 22vw;
+                height: 6vw;
+                line-height: 5vw;
                 font-size: 3vw;
-                color: #999;
-                margin-top: 0.5vw;
+                border: 1px solid red;
+                .coupon {
+                    display: inline-block;
+                    width: 26%;
+                    text-align: center;
+                    height: 100%;
+                    background: red;
+                    color: #fff;
+                }
+                .money {
+                  display: inline-block;
+                  width: 60%;
+                  height: 100%;
+                  text-align: center;
+                  color: red;
+                }
+              }
+              .list-price {
+                float: right;
+                font-size: 4vw;
+                font-weight: 600;
+                color: red;
               }
             }
           }

@@ -95,13 +95,13 @@ export default {
         float: left;
         width: 6%;
         height: 4vw;
-        margin-top: 0.5vw;
+        margin-top: 1vw;
       }
       p {
         float: left;
         width: 90%;
         font-size: 4vw;
-        margin-left: 4%;
+        margin-left: 2%;
       }
     }
   }

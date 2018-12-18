@@ -48,6 +48,7 @@ export default {
   background-image: url(../assets/img/user/background.png);
   background-size: 100% 100%;
   padding-top: 34vw;
+  box-sizing: border-box;
   .header-icon {
       background-color: #333;
       -webkit-box-sizing: border-box;

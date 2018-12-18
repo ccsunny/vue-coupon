@@ -32,8 +32,10 @@
                 </router-link>
             </li>
             <li>
-                <img src="../../assets/img/index/icon/icon-juhs.png"/>
-                <p>聚划算</p>
+                <router-link to="/redPacket">
+                    <img src="../../assets/img/index/icon/icon-lhb.png"/>
+                    <p>领红包</p>
+                </router-link>
             </li>
             <li>
                 <router-link to="/economize">

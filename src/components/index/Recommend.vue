@@ -3,7 +3,7 @@
     <div class="recommend">
       <img src="../../assets/img/index/fx.png" />
     </div>
-    <ul class="section3-list">
+    <ul class="section3-list" :style="{height:33*(list.length)+'vw'}">
       <li v-for="k in list" :key='k.id'>
           <img v-lazy="k.goods_main_photo">
           <div class="container">
@@ -11,14 +11,16 @@
               <img src="../../assets/img/category/tm.png"/>
               <p>{{k.goods_name}}</p>
             </div>
-            <div class="middle">
-              <span class="coupon">劵</span>
-              <span class="money">￥{{(Number(k.goods_price) - Number(k.goods_current_price)).toFixed(2)}}</span>
-            </div>
             <div class="bottom">
+              <del class="ac">￥{{ k.goods_price }}</del>
+              <div class="m-coupon">
+                  <span class="coupon">劵</span>
+                  <span class="money">￥{{(Number(k.goods_price) - Number(k.goods_current_price)).toFixed(2)}}</span>
+              </div>
+            </div>
+            <div class="middle">
               <span class="list-price">￥{{k.goods_current_price}}</span>
-              <del class="ac">￥{{k.goods_price}}</del>
-              <span class="sell">{{k.goods_salenum}}件已售</span>
+              <span class="sell">已售{{ k.goods_salenum }}件</span>
             </div>
           </div>
       </li>
@@ -78,7 +80,6 @@ export default {
   }
   .section3-list {
     padding: 0 2vw;
-    background-color: #eee;
     li {
       margin-right: 3vw;
       width: 48.4%;
@@ -113,51 +114,54 @@ export default {
             white-space: nowrap;
           }
         }
-        .middle {
-          width: 22vw;
-          height: 6vw;
-          line-height: 6vw;
-          font-size: 3vw;
-          border: 1px solid red;
-          margin-top: 2vw;
-          .coupon {
-            display: inline-block;
-            width: 26%;
-            text-align: center;
-            height: 100%;
-            background: red;
-            color: #fff;
-          }
-          .money {
-            display: inline-block;
-            width: 60%;
-            height: 100%;
-            text-align: center;
-            color: red;
-          }
-        }
         .bottom {
-          margin-top: 2vw;
-          .list-price {
-            float: left;
-            font-size: 4vw;
-            font-weight: 600;
-            color: red;
-          }
-          .ac {
-            float: left;
-            font-size: 3.5vw;
-            color: #999;
-            margin-left: 1vw;
-            margin-top: 0.5vw;
-          }
-          .sell {
-            float: right;
-            font-size: 3vw;
-            color: #999;
-            margin-top: 0.5vw;
-          }
-        }
+              margin-top: 2vw;
+              overflow: hidden;
+              .ac {
+                float: left;
+                font-size: 3.5vw;
+                color: #999;
+                margin-top: 0.5vw;
+              }
+              .m-coupon {
+                float: right;
+                width: 22vw;
+                height: 6vw;
+                line-height: 5vw;
+                font-size: 3vw;
+                border: 1px solid red;
+                .coupon {
+                    display: inline-block;
+                    width: 26%;
+                    text-align: center;
+                    height: 100%;
+                    background: red;
+                    color: #fff;
+                }
+                .money {
+                  display: inline-block;
+                  width: 60%;
+                  height: 100%;
+                  text-align: center;
+                  color: red;
+                }
+              }
+            }
+            .middle {
+              margin-top: 2vw;
+              .list-price {
+                float: left;
+                font-size: 4vw;
+                font-weight: 600;
+                color: red;
+              }
+              .sell {
+                float: right;
+                font-size: 3vw;
+                color: #999;
+                margin-top: 0.5vw;
+              }
+            }
       }
     }
     li:nth-child(2n) {

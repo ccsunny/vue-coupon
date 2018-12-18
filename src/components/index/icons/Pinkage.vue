@@ -10,13 +10,15 @@
         </div>
         <div class="hotGoods" ref="hotGoods">
             <ul class="goodsCon" ref="goodsCon">
-                <li v-for="item in goodsList" ref="goodList">
-                    <img :src="item.icon"/>
-                    <div class="offer">特价</div>
-                    <div class="rob">已抢56件</div>
-                    <p>{{ item.title }}</p>
-                    <span>￥{{ item.nowPrice }}</span>
-                    <del>￥{{ item.firstPrice }}</del>
+                <li v-for="item in topGoods" ref="goodList">
+                    <router-link :to="`/taoDetail?NUM_IID=${item.goodsId}`">
+                        <img v-lazy="item.goodsImgUrl"/>
+                        <div class="offer">特价</div>
+                        <div class="rob">已抢{{item.goodsVolume}}件</div>
+                        <p>{{ item.goodsName }}</p>
+                        <span>￥{{ item.goodsDiscountPrice }}</span>
+                        <del>￥{{ item.goodsFinalPrice }}</del>
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -25,93 +27,69 @@
             <span class="low">每日早上10点更新</span>
         </div>
         <ul class="goodsLists">
-            <li>
-                <img src="../../../assets/img/index/1.png"/>
-                <div class="right">
-                    <p>童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款</p>
-                    <div class="r-middle">
-                        <del>￥99</del>
-                        <div class="promptly">立即抢购</div>
+            <li v-for="k in bottomGoods">
+                <router-link :to="`/taoDetail?NUM_IID=${k.goodsId}`">
+                    <img v-lazy="k.goodsImgUrl"/>
+                    <div class="right">
+                        <p>{{k.goodsName}}</p>
+                        <div class="r-middle">
+                            <del>￥{{k.goodsDiscountPrice}}</del>
+                            <div class="promptly">立即抢购</div>
+                        </div>
+                        <div class="r-bottom">
+                            <span class="nowPrice">￥{{k.goodsFinalPrice}}</span>
+                            <span class="num">{{k.goodsVolume}}已售</span>
+                        </div>
                     </div>
-                    <div class="r-bottom">
-                        <span class="nowPrice">￥66</span>
-                        <span class="num">9999已售</span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <img src="../../../assets/img/index/1.png"/>
-                <div class="right">
-                    <p>童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款</p>
-                    <div class="r-middle">
-                        <del>￥99</del>
-                        <div class="promptly">立即抢购</div>
-                    </div>
-                    <div class="r-bottom">
-                        <span class="nowPrice">￥66</span>
-                        <span class="num">9999已售</span>
-                    </div>
-                </div>
+                </router-link>
             </li>
         </ul>
     </div>
 </template>
 <script>
+import { Lazyload } from 'mint-ui'
+import { Toast } from "mint-ui"
+import api from '../../../api/api'
 import BScroll from "better-scroll"
 import Header from '../../../common/Header'
 export default {
     data () {
         return {
-            goodsList: [
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-            ]
+            topGoods: [],
+            bottomGoods:[]
         };
     },
     components:{
         'v-header': Header,
     },
     mounted() {
-        this.InitGoodsListScroll();
+        this.getContent();
+        let that = this;
+        setTimeout(function(){
+            that.InitGoodListScroll();
+        }, 1000);
     },
     methods: {
-        InitGoodsListScroll(){
+        getContent: function () {
+            api.get("/fox/app/tb/freeShipping",{
+              params:{
+                USER_ID: "123455",
+                page: "1",
+                q:"1"
+              }
+            }).then(
+              (response)=>{
+                this.topGoods = response.data.content.topGoodsList
+                this.bottomGoods = response.data.content.goodsList
+              },
+              (error)=>{
+                  Toast("加载失败。。。");
+              }
+            );
+        },
+        InitGoodListScroll(){
             let width=0
-            for (let i = 0; i <this.goodsList.length; i++) {
+            for (let i = 0; i <this.topGoods.length; i++) {
                  width+=this.$refs.goodList[0].getBoundingClientRect().width; //getBoundingClientRect() 返回元素的大小及其相对于视口的位置
             }
             this.$refs.goodsCon.style.width=width+'vw'
@@ -159,7 +137,7 @@ export default {
     }
     .hotGoods {
         width: 100%;
-        height: 48vw;
+        height: 47vw;
         background: #fff;
         margin-bottom: 2vw;
         overflow-x: auto;
@@ -240,13 +218,13 @@ export default {
             box-sizing: border-box;
             img {
                 float: left;
-                width: 40%;
+                width: 34%;
                 height: 24vw;
                 margin-top: 2vw;
             }
             .right {
                 float: left;
-                width: 60%;
+                width: 66%;
                 height: 100%;
                 padding-top: 2vw;
                 padding-left: 2vw;

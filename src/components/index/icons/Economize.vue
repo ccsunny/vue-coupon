@@ -2,61 +2,45 @@
     <div class="economize">
         <div class="header">
             <i class="mint-toast-icon mintui mintui-back" @click="$router.go(-1)"></i>
-            <h1>省大牌</h1>
+            <router-link to="/search">
+              <div class="mint-searchbar-inner">
+                <i class="mintui mintui-search"></i>
+                <input type="search" placeholder="超级大牌" class="mint-searchbar-core">
+              </div>
+            </router-link>
         </div>
-        <div class="header-top">
-            <img src="../../../assets/img/index/icon/sdp/content.png"/>
-        </div>
-        <div class="container">
-            <div class="wrapper" ref="wrapper">
-                <ul class="content" ref="content">
-                    <li v-for="item in imgList" ref="tabList"><img :src="item.icon"/></li>
-                </ul>
-            </div>
-            <img class="banner" src="../../../assets/img/index/icon/sdp/banner1.png"/>
-        </div>
-        <v-hotList />
-        <div class="recommend">
-            <div class="top">
-                <img src="../../../assets/img/index/icon/sdp/icon-huo.png"/>
-                <span>人气推荐</span>
-            </div>
-            <img class="r-banner" src="../../../assets/img/index/icon/sdp/banner2.png"/>
+        <h1><img src="../../../assets/img/index/icon/sdp/icon-cjdp.png"/></h1>
+        <div class="hotGoods" ref="hotGoods">
+            <ul class="goodsCon" ref="goodsCon">
+                <li :class="{active:index == num}" v-for="(item,index) in goodsList" ref="goodList">{{item}}</li>
+            </ul>
         </div>
     </div>
 </template>
 <script>
 import BScroll from "better-scroll"
-import HotList from "./economize/HotList"
 export default {
     data () {
         return {
-            imgList: [
-                {icon: require('../../../assets/img/index/icon/sdp/oppo.jpg')},
-                {icon: require('../../../assets/img/index/icon/sdp/oppo.jpg')},
-                {icon: require('../../../assets/img/index/icon/sdp/oppo.jpg')},
-                {icon: require('../../../assets/img/index/icon/sdp/oppo.jpg')},
-                {icon: require('../../../assets/img/index/icon/sdp/oppo.jpg')},
-                {icon: require('../../../assets/img/index/icon/sdp/oppo.jpg')}
-            ],
+            goodsList:["居家","美食","运动户外","鞋包配饰","化妆品","母婴","内衣","女装","男装","数码家电","文体车品"],
+            num: 0
         };
     },
     components: {
-        'v-hotList': HotList,
     },
     mounted() {
-        this.InitTabListScroll();
+        this.InitGoodsListScroll();
     },
     methods: {
-        InitTabListScroll(){
+        InitGoodsListScroll(){
             let width=0
-            for (let i = 0; i <this.imgList.length; i++) {
-                 width+=this.$refs.tabList[0].getBoundingClientRect().width; //getBoundingClientRect() 返回元素的大小及其相对于视口的位置
+            for (let i = 0; i <this.goodsList.length; i++) {
+                 width+=this.$refs.goodList[0].getBoundingClientRect().width; //getBoundingClientRect() 返回元素的大小及其相对于视口的位置
             }
-            this.$refs.content.style.width=width+'vw'
+            this.$refs.goodsCon.style.width=width+'vw'
             this.$nextTick(()=>{
                 if (!this.scroll) {
-                    this.scroll=new BScroll(this.$refs.wrapper, {
+                    this.scroll=new BScroll(this.$refs.hotGoods, {
                         startX:0,
                         click:true,
                         scrollX:true,
@@ -75,105 +59,84 @@ export default {
 .economize {
     width: 100%;
     height: 100%;
-    background: #eee;
+    background: #fff;
     padding-top: 12vw;
-    box-sizing: border-box;    
+    box-sizing: border-box;
     .header {
         width: 100%;
         height: 12vw;
-        background-image: url(../../../assets/img/index/icon/sdp/ebackground.png);
+        padding-top: 2.5vw;
+        background-image: url(../../../assets/img/common/ysbk.png);
         background-size: 100% 100%;
+        box-sizing: border-box;
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 999;
+        z-index: 99999;
+        border-bottom: 1px solid #eee;
         .mintui-back {
-            position: absolute;
-            top: 4vw;
-            left: 6vw;
-            font-size: 5vw;
-            color: #fff;
-        }
-        h1 {
-            font-size: 5vw;
-            color: #fff;
-            text-align: center;
-            line-height: 12vw;            
-        }
-    }
-    .header-top {
-        width: 100%;
-        text-align: center;
-        height: 12vw;
-        background-image: url(../../../assets/img/index/icon/sdp/background.jpg);
-        background-size: 100% 100%;
-        position: relative;
-        img {
-            width: 80%;
-            height: 5vw;
-            margin-top: 2vw;            
-        }
-    }
-    .container {
-        width: 100%;
-        height: 50vw;
-        padding-top: 18vw;
-        background: #fff;    
-        .wrapper {
-            width: 100%;
-            height: 20vw;
-            position: absolute;
-            top: 21vw;
-            left: 0;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            &::-webkit-scrollbar {display:none}
-            touch-action: none;
-            .content {
-                height: 100%;
-                padding: 0 2vw;
-                li {
-                    display: inline-block;
-                    width: 28vw;
-                    height: 18vw;
-                    padding: 0 2vw;
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        box-shadow: 0 0 1px #eee;
-                    }
-                }
-            }
-        }
-        .banner {
-            display: block;
-            width: 92%;
-            height: 30vw;
-            margin: 0 auto;
-        }
-    }
-    .recommend {
-        width: 100%;
-        height: 46vw;
-        background: #fff;
-        margin-top: 2vw;
-        .top {
-            line-height: 10vw;
+            float: left;
+            margin-top: 1vw;
+            margin-left: 4vw;
+            margin-right: 4vw;
+        }  
+        .mint-searchbar-inner {
+            float: left;
+            padding: 0; 
             padding-left: 2vw;
-            img {
-                width: 6vw;
-                height: 6vw;
+            width: 80%;
+            height: 7vw;
+            background: #eee;
+            border-radius: 4vw;
+            box-sizing: border-box;
+            .mintui-search {
+                margin-right: 1vw;
+                font-size: 5vw;
+                color: #a4a4a4;
             }
-            span {
+            .mint-searchbar-core {
+                margin: 0;
+                padding: 0;
+                width: 88%;
+                height: 7vw;
+                background: #eee;
+                font-size: 4vw;
+                color: #a4a4a4;
+                text-align: left;
+            }
+        }
+    }
+    h1 {
+        text-align: center;
+        width: 100%;
+        height: 12vw;
+        line-height: 12vw;
+        img {
+            width: 38%;
+            height: 6vw;
+        }
+    }
+    .hotGoods {
+        width: 100%;
+        height: 10vw;
+        background: #fff;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        &::-webkit-scrollbar {display:none}
+        touch-action: none;
+        .goodsCon {
+            height: 100%;
+            padding: 0 2vw;
+            li {
+                display: inline-block;
+                padding: 0 4vw;
                 font-size: 4vw;
                 color: #333;
+                line-height: 10vw;
             }
-        }
-        .r-banner {
-            display: block;
-            width: 94%;
-            margin: 0 auto;
-            height: 34vw;
+            .active {
+                color: #ff3333;
+            }
         }
     }
 }

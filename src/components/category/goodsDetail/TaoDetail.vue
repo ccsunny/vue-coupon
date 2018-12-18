@@ -47,7 +47,7 @@ export default {
         params:{
           USER_ID: "EeThqo",
           item_id: this.$route.query.NUM_IID
-          }
+        }
         }).then(
         (response)=>{
           this.swiper = response.data.content.goodsItem.small_images
@@ -58,7 +58,7 @@ export default {
             params:{
               pageNo: 1,
               q: antistop,
-              USER_ID: "EeThqo"
+              USER_ID: "123455"
               }
             }).then(
             (res)=>{

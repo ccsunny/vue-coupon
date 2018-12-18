@@ -27,7 +27,6 @@
                 </div>
             </li>
         </ul>
-        <v-baseline />
     </div>
 </template>
 <script>
@@ -35,7 +34,6 @@ import { Lazyload } from 'mint-ui';
 import { mapGetters } from 'vuex'
 import { Toast } from "mint-ui"
 import Clipboard from 'clipboard'
-import Baseline from '@/common/Baseline.vue'
 export default {
     data () {
         return {
@@ -50,9 +48,6 @@ export default {
         ...mapGetters([
             'getShareGoodList',
         ])
-    },
-    components: {
-        'v-baseline': Baseline
     },
     methods: {
         imgError(item) {

@@ -5,55 +5,66 @@
         </v-header>
         <img class="banner" src="../../../assets/img/index/icon/xrzq.png"/>
         <ul class="goodsCon">
-            <li>
-                <img src="../../../assets/img/index/1.png">
+            <li v-for="item in goodLists">
+              <router-link :to="`/taoDetail?NUM_IID=${item.goodsId}`">
+                <img v-lazy="item.goodsImgUrl">
                 <div class="container">
                   <div class="top">
-                    <img src="../../../assets/img/category/tm.png"/>
-                    <p>童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款</p>
-                  </div>
-                  <div class="middle">
-                    <span class="coupon">劵</span>
-                    <span class="money">￥20</span>
+                    <img :src=" item.goodsType == 0 ? require('../../../assets/img/category/tb.png') : require('../../../assets/img/category/tm.png')" />
+                    <p>{{item.goodsName}}</p>
                   </div>
                   <div class="bottom">
-                    <span class="list-price">￥79</span>
-                    <del class="ac">￥99</del>
-                    <span class="sell">19999件已售</span>
-                  </div>
-                </div>
-            </li>
-            <li>
-                <img src="../../../assets/img/index/1.png">
-                <div class="container">
-                  <div class="top">
-                    <img src="../../../assets/img/category/tm.png"/>
-                    <p>童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款</p>
+                    <span class="sell">已售{{ item.goodsVolume }}件</span>
+                    <del class="ac">￥{{ item.goodsPrice }}</del>
                   </div>
                   <div class="middle">
-                    <span class="coupon">劵</span>
-                    <span class="money">￥20</span>
-                  </div>
-                  <div class="bottom">
-                    <span class="list-price">￥79</span>
-                    <del class="ac">￥99</del>
-                    <span class="sell">19999件已售</span>
+                    <div class="m-coupon">
+                        <span class="coupon">劵</span>
+                        <span class="money">￥{{item.goodsCouponInfo}}</span>
+                    </div>
+                    <span class="list-price">￥{{item.goodsFinalPrice}}</span>
                   </div>
                 </div>
+              </router-link>
             </li>
         </ul>
     </div>
 </template>
 <script>
+import { Lazyload } from 'mint-ui'
+import { Toast } from "mint-ui"
+import api from '../../../api/api'
 import Header from '../../../common/Header'
 export default {
     data () {
         return {
+            goodLists: []
         };
     },
     components:{
         'v-header': Header,
     },
+    mounted() {
+      this.getContent();
+    },
+    methods: {
+        getContent: function () {
+            api.get("/fox/app/tb/tbkGetItems",{
+              params:{
+                USER_ID: "123455",
+                page_no: "1",
+                q:"1"
+              }
+            }).then(
+              (response)=>{
+                this.goodLists = response.data.content.goodsList
+              },
+              (error)=>{
+                  Toast("加载失败。。。");
+              }
+            );
+        },
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -92,62 +103,67 @@ export default {
             .top {
               img {
                 float: left;
-                width: 10%;
+                width: 12%;
                 height: 4vw;
                 margin-right: 3%;
+                margin-top: 1vw;
               }
               p {
                 font-size: 4vw;
                 color: #333;
-                width: 85%;
+                width: 83%;
                 overflow: hidden;
                 text-overflow:ellipsis;
                 white-space: nowrap;
               }
             }
-            .middle {
-              width: 22vw;
-              height: 6vw;
-              line-height: 6vw;
-              font-size: 3vw;
-              border: 1px solid red;
-              margin-top: 2vw;
-              .coupon {
-                display: inline-block;
-                width: 26%;
-                text-align: center;
-                height: 100%;
-                background: red;
-                color: #fff;
-              }
-              .money {
-                display: inline-block;
-                width: 60%;
-                height: 100%;
-                text-align: center;
-                color: red;
-              }
-            }
             .bottom {
               margin-top: 2vw;
-              .list-price {
+              overflow: hidden;
+              .sell {
                 float: left;
-                font-size: 4vw;
-                font-weight: 600;
-                color: red;
+                font-size: 3vw;
+                color: #999;
+                margin-top: 0.5vw;
               }
               .ac {
-                float: left;
+                float: right;
                 font-size: 3.5vw;
                 color: #999;
                 margin-left: 1vw;
                 margin-top: 0.5vw;
               }
-              .sell {
-                float: right;
+            }
+            .middle {
+              margin-top: 2vw;
+              .m-coupon {
+                float: left;
+                width: 22vw;
+                height: 6vw;
+                line-height: 5vw;
                 font-size: 3vw;
-                color: #999;
-                margin-top: 0.5vw;
+                border: 1px solid red;
+                .coupon {
+                    display: inline-block;
+                    width: 26%;
+                    text-align: center;
+                    height: 100%;
+                    background: red;
+                    color: #fff;
+                }
+                .money {
+                  display: inline-block;
+                  width: 60%;
+                  height: 100%;
+                  text-align: center;
+                  color: red;
+                }
+              }
+              .list-price {
+                float: right;
+                font-size: 4vw;
+                font-weight: 600;
+                color: red;
               }
             }
           }

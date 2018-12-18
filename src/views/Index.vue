@@ -17,7 +17,6 @@
     <v-banner />
     <v-everyday />
     <v-recommend/>
-    <v-baseline/>
     <mt-tabbar/>
   </div>
 </template>
@@ -30,7 +29,6 @@ import Review from '@/components/index/Review.vue'
 import Banner from '@/components/index/Banner'
 import Everyday from '@/components/index/Everyday'
 import Recommend from '@/components/index/Recommend'
-import Baseline from '@/common/Baseline'
 import Tabbar from '@/common/Tabbar.vue'
 export default {
   data() {
@@ -47,7 +45,6 @@ export default {
     'v-banner': Banner,
     'v-everyday': Everyday,
     'v-recommend': Recommend,
-    'v-baseline': Baseline,
     'mt-tabbar': Tabbar
   },
   methods: {

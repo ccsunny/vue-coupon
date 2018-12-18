@@ -18,6 +18,7 @@ const Pinkage = resolve => require(['../components/index/icons/Pinkage.vue'], re
 const SpellGoods = resolve => require(['../components/index/icons/SpellGoods.vue'], resolve)
 const TodayRecommend = resolve => require(['../components/index/icons/TodayRecommend.vue'], resolve)
 const TaoGrab = resolve => require(['../components/index/icons/TaoGrab.vue'], resolve)
+const RedPacket = resolve => require(['../components/index/icons/RedPacket.vue'], resolve)
 export default new Router({
   routes: [
     {
@@ -94,6 +95,11 @@ export default new Router({
       path: '/taoGrab',
       name: '淘抢购',
       component: TaoGrab,
+    },
+    {
+      path: '/redPacket',
+      name: '领红包',
+      component: RedPacket,
     },
   ]
 })
