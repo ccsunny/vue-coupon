@@ -118,7 +118,7 @@ export default {
     }
     .hotGoods {
         width: 100%;
-        height: 10vw;
+        height: 8vw;
         background: #fff;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -132,7 +132,7 @@ export default {
                 padding: 0 4vw;
                 font-size: 4vw;
                 color: #333;
-                line-height: 10vw;
+                line-height: 8vw;
             }
             .active {
                 color: #ff3333;
