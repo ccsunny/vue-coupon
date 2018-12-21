@@ -62,11 +62,12 @@ export default {
   }
   ul {
     margin-top: 4vw;
+    padding: 0 2vw;
     li {
-      width: 94%;
+      width: 100%;
       height: 34vw;
-      margin: 0 auto;
       background: #fff;
+      margin-bottom: 2vw;
       .left {
         float: left;
         width: 34%;
@@ -75,7 +76,7 @@ export default {
       .right {
         float: left;
         width: 65%;
-        margin-left: 1%;
+        padding-left: 4%;
         .r-top {
           width: 100%;
           height: 10vw;
@@ -100,12 +101,12 @@ export default {
         }
         .r-middle {
           font-size: 3vw;
-          padding-left: 8vw;
+          padding-left: 16%;
           color: #999;
         }
         .r-bottom {
-          margin-top: 5vw;
-          padding-left: 12%;
+          margin-top: 6vw;
+          padding-left: 16%;
           .current-price {
             float: left;
             font-size: 4vw;

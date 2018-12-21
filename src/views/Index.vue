@@ -6,7 +6,7 @@
       <router-link to="/search">
         <div class="mint-searchbar-inner">
             <i class="mintui mintui-search"></i>
-            <input type="search" placeholder="粘贴或搜索名称,领劵购买" class="mint-searchbar-core" autofocus="autofocus">
+            <input type="search" placeholder="粘贴或输入要查询的商品名称搜索" class="mint-searchbar-core">
         </div>
       </router-link>
       <img class="download" src="../assets/img/index/download.png" @click="download" />
@@ -14,8 +14,8 @@
     <v-swiper />
     <v-icons /> 
     <v-review/>
-    <v-banner />
-    <v-everyday />
+    <v-banner :bannerList="bannerList"/>
+    <v-everyday :everydayList="everydayList"/>
     <v-recommend/>
     <mt-tabbar/>
   </div>
@@ -23,6 +23,7 @@
 
 <script>
 import { Toast } from "mint-ui"
+import api from '../api/api'
 import Swiper from '@/components/index/Swiper.vue'
 import Icons from '@/components/index/Icons.vue'
 import Review from '@/components/index/Review.vue'
@@ -33,9 +34,8 @@ import Tabbar from '@/common/Tabbar.vue'
 export default {
   data() {
     return {
-      datas: {
-        
-      },
+        bannerList: {},
+        everydayList: {}
     }
   },
   components: {
@@ -47,6 +47,9 @@ export default {
     'v-recommend': Recommend,
     'mt-tabbar': Tabbar
   },
+  mounted() {
+    this.getContent();
+  },
   methods: {
     download: function() {
       var ua = navigator.userAgent.toLowerCase();
@@ -55,7 +58,22 @@ export default {
       } else {
           window.location.href="http://sj.qq.com/myapp/detail.htm?apkName=com.qianlihu.hs";
       }
-    }
+    },
+    getContent: function () {
+      api.get("/fox/app/acti/towTwelveAndEverybodyBuyItems",{
+        params:{
+          USER_ID: "EeThqo"
+        }
+      }).then(
+        (response)=>{
+          this.bannerList = response.data.content
+          this.everydayList = response.data.content
+        },
+        (error)=>{
+            Toast("加载失败。。。");
+        }
+      );
+    },
   },
 }
 </script>
@@ -63,7 +81,7 @@ export default {
 <style lang="less" scoped>
 .index {
     width: 100%;
-    padding-bottom: 14vw;
+    padding-bottom: 16vw;
     background-color: #eee;
     position: relative;
     .header {
@@ -78,7 +96,7 @@ export default {
       .logo {
         float: left;
         width: 9%;
-        height: 8vw;
+        height: 9vw;
         margin-right: 4%;
         margin-left: 3%;
       }

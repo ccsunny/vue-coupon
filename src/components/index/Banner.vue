@@ -3,56 +3,26 @@
     <div class="life">
       <img src="../../assets/img/index/xp.png" />
     </div>
-    <div class="middle">
+    <div class="top">
       <ul>
-        <li>
-          <div class="middle-t">
-            <img src="../../assets/img/index/xsqg.png"/>
-          </div>
-          <div class="middle-m">每天好货爆炒</div>
-          <div class="middle-b">
-            <img src="../../assets/img/index/tmbt.png"/>
-            <img src="../../assets/img/index/time.png"/>
-          </div>
-          <img src="../../assets/img/index/jg.png"/>
-        </li>
-        <li>
-          <div class="middle-t">
-            <img src="../../assets/img/index/fxhh.png"/>
-          </div>
-          <div class="middle-m">高品质生活</div>
-          <img src="../../assets/img/index/2.png"/>
-          <img src="../../assets/img/index/3.png"/>
+        <li v-for="k in bannerList.towTwelveTopGoodsList">
+          <router-link :to="k.goodsType == 2 ? `/jingDetail?goods_id=${k.goodsId}` : `/taoDetail?NUM_IID=${k.goodsId}`">
+            <img v-lazy="k.goodsImgUrl"/>
+            <p>{{k.goodsName}}</p>
+            <span>￥{{k.goodsDiscountPrice}}</span>
+          </router-link>
         </li>
       </ul>
     </div>
-    <div class="bottom">
-      <ul>
-        <li>
-          <ul>
-            <li>
-              <div class="bottom-t"><img src="../../assets/img/index/pp.png"/></div>
-              <div class="bottom-m" style="margin-top: 2vw;">产品名称</div>
-              <div class="bottom-b"><img src="../../assets/img/index/shoes.png"/></div>
-              <p class="money">￥200</p>
-              <p><del>￥400</del></p>
-            </li>
-            <li>
-              <div class="bottom-t"><img src="../../assets/img/index/pl.png"/></div>
-              <div class="bottom-m">199减100</div>
-              <div class="bottom-b"><img src="../../assets/img/index/ej.png"/></div>
-              <p class="money">￥200</p>
-              <p><del>￥400</del></p>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <div class="right-t">
-            <img src="../../assets/img/index/tbzx.png"/>
-          </div>
-          <div class="right-m">优惠券领不停</div>
-          <img src="../../assets/img/index/wsj.png"/>
-          <img src="../../assets/img/index/zb.png"/>
+    <div class="hotGoods" ref="hotGoods">
+      <ul class="goodsCon" ref="goodsCon">
+        <li v-for="item in bannerList.towTwelveContentGoodsList" ref="goodList">
+          <router-link :to="item.goodsType == 2 ? `/jingDetail?goods_id=${item.goodsId}` : `/taoDetail?NUM_IID=${item.goodsId}`">
+            <img v-lazy="item.goodsImgUrl"/>
+            <p class="title">{{item.goodsName}}</p>
+            <p class="volume">{{item.goodsVolume}}人已买</p>
+            <p class="money">￥{{item.goodsDiscountPrice}}</p>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -60,174 +30,169 @@
 </template>
 
 <script>
-import { Lazyload } from 'mint-ui';
-
+import { Lazyload } from 'mint-ui'
+import BScroll from "better-scroll"
 export default {
   data () {
     return {
     };
   },
+  props: {
+    bannerList: {
+      type: Object,
+      required: true
+    }
+  },
+  mounted() {
+    let that = this;
+    setTimeout(function(){
+        that.InitGoodsListScroll();
+    }, 1000);
+  },
+  methods: {
+    InitGoodsListScroll(){
+      let width=0
+      for (let i = 0; i <this.bannerList.towTwelveContentGoodsList.length; i++) {
+           width+=this.$refs.goodList[0].getBoundingClientRect().width; //getBoundingClientRect() 返回元素的大小及其相对于视口的位置
+      }
+      this.$refs.goodsCon.style.width=width+'px'
+      this.$nextTick(()=>{
+          if (!this.scroll) {
+              this.scroll=new BScroll(this.$refs.hotGoods, {
+                  startX:0,
+                  click:true,
+                  scrollX:true,
+                  scrollY:false,
+                  eventPassthrough:'vertical'
+              });
+          }else{
+              this.scroll.refresh()
+          }
+      });
+    },
+  }
 }
-
 </script>
 
 <style lang="less" scoped>
+li {
+  background: #fff;
+}
 .section1 {
-  padding: 0 2vw;
+  padding-top: 1vw;
   .life {
     width: 100%;
-    height: 5vw;
+    height: 6vw;
     margin-bottom: 3vw;
     img {
       display: block;
-      width: 50%;
+      width: 52%;
       height: 100%;
       margin: 0 auto;
     }
   }
-  .middle {
-    margin-top: 0.5vw;
+  .top {
     ul {
       width: 100%;
-      height: 42vw;
+      height: 44vw;
+      text-align: center;
+      background: #fff;
       li {
         float: left;
         width: 50%;
         height: 100%;
-        background: #fff;
-        .middle-t {
-          width: 20vw;
-          height: 5vw;
-          margin-left: 2vw;
-          img {
-            width: 100%;
-            height: 100%;
-          }
+        padding-top: 6vw;
+        box-sizing: border-box;
+        position: relative;
+        img {
+          width: 52%;
+          height: 22vw;
         }
-        .middle-m {
-          font-size: 3vw;
-          color: #999;
-          margin-top: 2vw;
-          margin-left: 2vw;
-        }
-        .middle-b {
-          padding-left: 1.5vw;
-          margin-top: 1vw;
-          overflow:hidden;
-          img {
-            float: left;
-            width: 16vw;
-            height: 5vw;
-            margin-right: 2vw;
-          }
-        }
-      }
-      li:first-child {
-        width: 49%;
-        border-right: 1px solid #eee;
-        >img {
-          display: block;
-          width: 34vw;
-          height: 21vw;
+        p{
+          width: 64%;
           margin: 0 auto;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+          font-size: 4vw;
+          color: #333;
           margin-top: 2vw;
         }
-      }
-      li:last-child {
-        >img {
-          float: left;
-          width: 50%;
-          margin-top: 4vw;
+        span {
+          font-size: 4vw;
+          color: #f0306f;
+          font-weight: 600;
         }
+      }
+      li:after {
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: 0;
+        width: 1px;
+        height: 80%;
+        background: #eee;
       }
     }
   }
-  .bottom {
-    ul {
-      width: 100%;
-      height: 42vw;
-      border-top: 1px solid #eee;
-      >li {
+  .hotGoods {
+    border-top: 1px solid #eee;
+    width: 100%;
+    height: 44vw;
+    background: #fff;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {display:none}
+    touch-action: none;
+    .goodsCon{
+      height: 100%;
+      background: #fff;
+      li {
         float: left;
-        width: 50%;
+        width: 33.5vw;
         height: 100%;
-        background: #fff;
-      }
-      >li:first-child {
-        width: 49%;
-        border-right: 1px solid #eee;
-        ul {
-          width: 100%;
-          height: 100%;
-          border-top: none;
-          li {
-            width: 50%;
-            height: 100%;
-            .bottom-t {
-              width: 18vw;
-              height: 5vw;
-              margin-left: 2vw;
-              img {
-                width: 100%;
-                height: 100%;
-              }
-            }
-            .bottom-m {
-              font-size: 3vw;
-              color: #999;
-              margin-left: 2vw;
-              margin-top: 1vw;
-            }
-            .bottom-b {
-              width: 100%;
-              height: 18vw;
-              margin-top: 1vw;
-              img {
-                width: 100%;
-                height: 100%;
-              }
-            }
-            p {
-              font-size: 3vw;
-              text-align: center;
-              line-height: 4vw;
-            }
-            .money {
-              font-size: 4vw;
-              font-weight: 600;
-              color: #f0306f;
-              margin-top: 1vw;
-            }
-          }
-          li:first-child {
-            width: 49%;
-            border-right: 1px solid #eee;
-          }
-        }
-      }
-      >li:last-child {
-        padding-top: 1vw;
+        padding: 2vw;
         box-sizing: border-box;
-        .right-t {
-          width: 20vw;
-          height: 5vw;
-          margin-left: 2vw;
-          img {
-            width: 100%;
-            height: 100%;
-          }
-        }
-        .right-m {
-          font-size: 3vw;
-          color: #999;
-          margin-top: 2vw;
-          margin-left: 2vw;
-        }
+        position: relative;
         img {
-          float: left;
-          width: 50%;
-          height: 22vw;
+          width: 100%;
+          height: 24vw;
         }
+        p {
+          line-height: 5vw;
+          margin: 0;
+          text-align: center;
+        }
+        .title {
+          width: 100%;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+          font-size: 4vw;
+          color: #333; 
+          margin-top: 2vw;
+        }
+        .volume {
+          color: #999;
+          font-size: 3vw;
+        }
+        .money {
+          font-size: 4vw;
+          color: #f0306f;
+          font-weight: 600;
+        }
+      }
+      li:after {
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: 0;
+        width: 1px;
+        height: 80%;
+        background: #eee;
+      }
+      li:last-child:after {
+        width: 0;
       }
     }
   }

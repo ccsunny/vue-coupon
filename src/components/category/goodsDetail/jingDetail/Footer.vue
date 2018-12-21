@@ -1,6 +1,6 @@
 <template lang="html">
   <footer class="footer">
-    <a class="copy" target="_blank" :href="coupon.discount_link">领劵购买</a>
+    <a class="copy" target="_blank" :href="coupon.link">领劵购买</a>
   </footer>
 </template>
 

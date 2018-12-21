@@ -3,34 +3,45 @@
         <v-header class="header">
             <h1 slot="title">购物领红包</h1>
         </v-header>
-        <img class="banner" src="../../../assets/img/index/icon/xrzq.png"/>
-        <ul class="goodsCon">
-            <li v-for="item in goodLists">
-              <router-link :to="`/taoDetail?NUM_IID=${item.goodsId}`">
-                <img v-lazy="item.goodsImgUrl">
-                <div class="container">
-                  <div class="top">
-                    <img :src=" item.goodsType == 0 ? require('../../../assets/img/category/tb.png') : require('../../../assets/img/category/tm.png')" />
-                    <p>{{item.goodsName}}</p>
-                  </div>
-                  <div class="bottom">
-                    <span class="sell">已售{{ item.goodsVolume }}件</span>
-                    <del class="ac">￥{{ item.goodsPrice }}</del>
-                  </div>
-                  <div class="middle">
-                    <div class="m-coupon">
-                        <span class="coupon">劵</span>
-                        <span class="money">￥{{item.goodsCouponInfo}}</span>
+        <div class="hotGoods" ref="hotGoods">
+            <ul class="goodsCon" ref="goodsCon">
+                <li :class="{active:index == num}" v-for="(item,index) in goodsList" :key="index" @click="tab(index,item)" ref="goodList">{{item}}</li>
+            </ul>
+        </div>
+        <div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-10) + 'px' }">
+          <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :autoFill="isAutoFill">
+            <img class="banner" src="../../../assets/img/index/icon/xrzq.png"/>
+            <ul class="goodsCon">
+                <li v-for="(item,index) in goodLists">
+                  <router-link :to="item.goodsType == 2 ? `/jingDetail?goods_id=${item.goodsId}` : `/taoDetail?NUM_IID=${item.goodsId}`">
+                    <img :src="item.goodsImgUrl">
+                    <div class="container">
+                      <div class="top">
+                        <img :src=" item.goodsType == 0 ? require('../../../assets/img/category/tb.png') : item.goodsType == 1 ? require('../../../assets/img/category/tm.png') : require('../../../assets/img/category/jd.png')"/>
+                        <p>{{item.goodsName}}</p>
+                      </div>
+                      <div class="bottom">
+                        <span class="sell">已售{{ item.goodsVolume }}件</span>
+                        <del class="ac">￥{{ item.goodsPrice }}</del>
+                      </div>
+                      <div class="middle">
+                        <div class="m-coupon">
+                            <span class="coupon">劵</span>
+                            <span class="money">￥{{item.goodsCouponInfo}}</span>
+                        </div>
+                        <span class="list-price">￥{{item.goodsFinalPrice}}</span>
+                      </div>
                     </div>
-                    <span class="list-price">￥{{item.goodsFinalPrice}}</span>
-                  </div>
-                </div>
-              </router-link>
-            </li>
-        </ul>
+                  </router-link>
+                </li>
+            </ul>
+            <div class="end" v-if="allLoaded">已经到底了，没有更多数据了</div>
+          </mt-loadmore>
+        </div>
     </div>
 </template>
 <script>
+import BScroll from "better-scroll"
 import { Lazyload } from 'mint-ui'
 import { Toast } from "mint-ui"
 import api from '../../../api/api'
@@ -38,41 +49,128 @@ import Header from '../../../common/Header'
 export default {
     data () {
         return {
-            goodLists: []
+          goodsList:["居家","女装","男装","母婴","数码","食品","美妆"],
+          num: 0,
+          goodLists: [],
+          //可以进行上拉
+          allLoaded: false,
+          //是否自动触发上拉函数
+          isAutoFill: false,
+          wrapperHeight: 0,
+          page_no: 1,
+          q: "居家"
         };
     },
     components:{
         'v-header': Header,
     },
+    created() {
+      this.tab(0,this.q);
+    },
     mounted() {
-      this.getContent();
+      this.InitGoodsListScroll();
+      // 父控件要加上高度，否则会出现上拉不动的情况
+      this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
     },
     methods: {
-        getContent: function () {
-            api.get("/fox/app/tb/tbkGetItems",{
-              params:{
-                USER_ID: "123455",
-                page_no: "1",
-                q:"1"
+      loadBottom() {
+        this.page_no++;
+        this.loadMore();
+      },
+      tab(index,item) {
+        this.num = index;
+        this.q = item;
+        api.get("/fox/app/tb/tbkGetItems",{
+            params:{
+              USER_ID: "EeThqo",
+              page_no: this.page_no,
+              q: item
+            }
+          }).then(
+            (response)=>{
+              this.goodLists = response.data.content.goodsList;
+            },
+            (error)=>{
+                Toast("加载失败。。。");
+            }
+          );
+      },
+      loadMore: function () {
+          api.get("/fox/app/tb/tbkGetItems",{
+            params:{
+              USER_ID: "EeThqo",
+              page_no: this.page_no,
+              q: this.q
+            }
+          }).then(
+            (response)=>{
+              this.goodLists = this.goodLists.concat(response.data.content.goodsList);
+              if (this.page_no > 10) {
+                this.allLoaded = true; // 若数据已全部获取完毕
               }
-            }).then(
-              (response)=>{
-                this.goodLists = response.data.content.goodsList
-              },
-              (error)=>{
-                  Toast("加载失败。。。");
-              }
-            );
-        },
+              this.$refs.loadmore.onBottomLoaded();
+            },
+            (error)=>{
+                Toast("加载失败。。。");
+            }
+          );
+      },
+      InitGoodsListScroll(){
+        let width=16
+        for (let i = 0; i <this.goodsList.length; i++) {
+             width+=this.$refs.goodList[0].getBoundingClientRect().width; //getBoundingClientRect() 返回元素的大小及其相对于视口的位置
+        }
+        this.$refs.goodsCon.style.width=width+'px'
+        this.$nextTick(()=>{
+            if (!this.scroll) {
+                this.scroll=new BScroll(this.$refs.hotGoods, {
+                    startX:0,
+                    click:true,
+                    scrollX:true,
+                    scrollY:false,
+                    eventPassthrough:'vertical'
+                });
+            }else{
+                this.scroll.refresh()
+            }
+        });
+      },
     }
 }
 </script>
 <style lang="less" scoped>
 .new {
+  width: 100%;
+  height: 100%;
+  padding-top: 12vw;
+  box-sizing: border-box;
+  .hotGoods {
     width: 100%;
-    height: 100%;
-    padding-top: 12vw;
-    box-sizing: border-box;
+    height: 10vw;
+    background: #fff;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {display:none}
+    touch-action: none;
+    .goodsCon {
+        height: 100%;
+        padding: 0 2vw;
+        li {
+            display: inline-block;
+            width: 20vw;
+            text-align: center;
+            font-size: 4vw;
+            color: #333;
+            line-height: 10vw;
+        }
+        .active {
+            color: #ff3333;
+            // border-bottom: 1px solid #ff3333;
+        }
+    }
+  }
+  .main-body {
+    overflow: scroll;
     .banner {
         display: block;
         width: 100%;
@@ -85,7 +183,7 @@ export default {
         li {
           margin-right: 1vw;
           width: 49.4%;
-          height: 66vw;
+          height: 70vw;
           float: left;
           margin-bottom: 2vw;
           border-radius: 5px;
@@ -93,7 +191,7 @@ export default {
           img {
             display: block;
             width: 100%;
-            height: 40vw;
+            height: 44vw;
             border-radius: 5px;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
@@ -172,5 +270,11 @@ export default {
           margin-right: 0;
         }
     }
+    .end {
+      text-align: center;
+      font-size: 3vw;
+      color: #333;
+    }
+  }
 }
 </style>

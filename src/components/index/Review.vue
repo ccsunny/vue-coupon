@@ -19,7 +19,11 @@
                 <router-link to="/index/more">更多</router-link>
               </div>
             </div>
-            <div class="banner"><img src="../../assets/img/index/banner.png"/></div>
+            <div class="banner">
+              <router-link to="/category">
+                <img src="../../assets/img/index/banner.png"/>
+              </router-link>
+            </div>
         </div>
     </div>
 </template>

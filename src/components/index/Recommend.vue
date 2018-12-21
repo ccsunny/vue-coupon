@@ -4,61 +4,67 @@
       <img src="../../assets/img/index/fx.png" />
     </div>
     <ul class="section3-list" :style="{height:33*(list.length)+'vw'}">
-      <li v-for="k in list" :key='k.id'>
-          <img v-lazy="k.goods_main_photo">
+      <li v-for="k in list">
+        <router-link :to="k.goodsType == 2 ? `/jingDetail?goods_id=${k.goodsId}` : `/taoDetail?NUM_IID=${k.goodsId}`">
+          <img v-lazy="k.goodsImgUrl">
           <div class="container">
             <div class="top">
-              <img src="../../assets/img/category/tm.png"/>
-              <p>{{k.goods_name}}</p>
+              <img :src=" k.goodsType == 0 ? require('../../assets/img/category/tb.png') : k.goodsType == 1 ? require('../../assets/img/category/tm.png') : require('../../assets/img/category/jd.png')"/>
+              <p>{{k.goodsName}}</p>
             </div>
             <div class="bottom">
-              <del class="ac">￥{{ k.goods_price }}</del>
+              <del class="ac">￥{{ k.goodsPrice }}</del>
               <div class="m-coupon">
                   <span class="coupon">劵</span>
-                  <span class="money">￥{{(Number(k.goods_price) - Number(k.goods_current_price)).toFixed(2)}}</span>
+                  <span class="money">￥{{k.goodsCouponInfo}}</span>
               </div>
             </div>
             <div class="middle">
-              <span class="list-price">￥{{k.goods_current_price}}</span>
-              <span class="sell">已售{{ k.goods_salenum }}件</span>
+              <span class="list-price">￥{{k.goodsDiscountPrice}}</span>
+              <span class="sell">已售{{ k.goodsVolume }}件</span>
             </div>
           </div>
+        </router-link>
       </li>
     </ul>
+    <button class="button" @click="getMore">{{ pageNo > 10 ? "没有更多数据了" : "加载更多" }}</button>
   </section>
 </template>
 
 <script>
 import { Lazyload } from 'mint-ui';
 import { Toast } from "mint-ui"
-import { mapGetters } from 'vuex'
 import api from '../../api/api'
 export default {
   data() {
     return {
       list:[],
+      pageNo: 1
     }
   },
-  computed: {
-    // mix the getters into computed with object spread operator
-    ...mapGetters([
-      'getShopUrl',
-    ])
-  },
-  mounted() {
-   this.getList();
+  created() {
+    this.getList();
   },
   methods: {
     getList: function () {
-      api.post(`${this.getShopUrl}/app/mall/mall/getGoodsListNumber2.htm`,{emulateJSON: true}).then(
+      api.get("/fox/app/home/findGoods",{
+        params:{
+          USER_ID: "EeThqo",
+          pageNo: this.pageNo
+        }
+      }).then(
         (response)=>{
-          this.list = response.data.content.goodsList
+          this.list = this.list.concat(response.data.content.findGoods);
         },
         (error)=>{
             Toast("加载失败。。。");
         }
       );
-    }
+    },
+    getMore() {
+      this.pageNo++;
+      this.getList();
+    },
   }
 }
 </script>
@@ -69,11 +75,11 @@ export default {
   padding-top: 3vw;
   .recommend {
     width: 100%;
-    height: 5vw;
+    height: 6vw;
     margin-bottom: 3vw;
     img {
       display: block;
-      width: 50%;
+      width: 52%;
       height: 100%;
       margin: 0 auto;
     }
@@ -83,7 +89,7 @@ export default {
     li {
       margin-right: 3vw;
       width: 48.4%;
-      height: 64vw;
+      height: 70vw;
       float: left;
       margin-bottom: 2vw;
       border-radius: 5px;
@@ -91,7 +97,7 @@ export default {
       img {
         display: block;
         width: 100%;
-        height: 40vw;
+        height: 46vw;
         border-radius: 5px;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
@@ -102,8 +108,9 @@ export default {
           img {
             float: left;
             width: 10%;
-            height: 4vw;
+            height: 3vw;
             margin-right: 3%;
+            margin-top: 1vw;
           }
           p {
             font-size: 4vw;
@@ -167,6 +174,16 @@ export default {
     li:nth-child(2n) {
       margin-right: 0;
     }
+  }
+  .button {
+    width: 60%;
+    text-align: center;
+    margin-left: 20%;
+    height: 10vw;
+    font-size: 4vw;
+    line-height: 10vw;
+    background: #f0306f;
+    color: #fff;
   }
 }
 </style>

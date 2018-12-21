@@ -39,7 +39,7 @@ export default {
     padding-bottom: 4vw;
     .top {
       overflow: hidden;
-      padding-left: 8vw;
+      padding-left: 6%;
       .top-coupon {
           float: left;
           margin-top: 6vw;
@@ -69,7 +69,7 @@ export default {
         background-image: url(../../../../assets/img/category/yhj.png);
         background-size: 100% 100%;
         color: #fff;
-        margin-left: 16vw;
+        margin-left: 16%;
       }
     }
     .middle {

@@ -9,12 +9,12 @@
             <span>今日必拼</span>
         </div>
         <div class="hotGoods" ref="hotGoods">
-            <ul class="goodsCon" ref="goodsCon">
+            <ul class="goodsCon" ref="goodsCon" :style="{width:40*(goodsList.length)+'vw'}">
                 <li v-for="item in goodsList" ref="goodList">
-                    <img :src="item.icon"/>
-                    <p>{{ item.title }}</p>
-                    <del>￥{{ item.firstPrice }}</del>
-                    <span>拼团价￥{{ item.nowPrice }}</span>
+                    <img v-lazy="item.goodsImgUrl"/>
+                    <p>{{ item.goodsName }}</p>
+                    <del>￥{{ item.goodsPrice }}</del>
+                    <span>拼团价￥{{ item.goodsFinalPrice }}</span>
                     <img class="spell-con" src="../../../assets/img/index/icon/spellGoods/spell.png"/>
                 </li>
             </ul>
@@ -24,104 +24,78 @@
             <span class="spell">拼拼推荐</span>
         </div>
         <ul class="goodsContent">
-            <li>
-                <img src="../../../assets/img/index/1.png">
+            <li v-for="k in bottomGoodsList">
+                <img v-lazy="k.goodsImgUrl">
                 <div class="container">
                   <div class="top">
-                    <img src="../../../assets/img/category/tm.png"/>
-                    <p>童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款</p>
+                    <img :src=" k.goodsType == 0 ? require('../../../assets/img/category/tb.png') : k.goodsType == 1 ? require('../../../assets/img/category/tm.png') : require('../../../assets/img/category/jd.png')"/>
+                    <p>{{k.goodsName}}</p>
                   </div>
-                  <div class="middle">京东价￥999</div>
+                  <div class="middle">原价￥{{k.goodsPrice}}</div>
                   <div class="bottom">
-                    <span>2人拼团价</span><span class="price">￥666</span>
-                    <p>去拼团</p>
+                    <span>2人拼团价</span><span class="price">￥{{k.goodsFinalPrice}}</span>
                   </div>
+                  <p class="spell">去拼团</p>
+                  <!--
                   <div class="evaluate">
-                    <span class="num">99999条评价</span>
-                    <span>好评90%</span>
+                    <span class="num">{{k.comments}}条评价</span>
+                    <span>好评{{k.goodCommentsShare}}%</span>
                   </div>
+                  -->
                 </div>
             </li>
-            <li>
-                <img src="../../../assets/img/index/1.png">
-                <div class="container">
-                  <div class="top">
-                    <img src="../../../assets/img/category/tm.png"/>
-                    <p>童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款</p>
-                  </div>
-                  <div class="middle">京东价￥999</div>
-                  <div class="bottom">
-                    <span>2人拼团价</span><span class="price">￥666</span>
-                    <p>去拼团</p>
-                  </div>
-                  <div class="evaluate">
-                    <span class="num">99999条评价</span>
-                    <span>好评90%</span>
-                  </div>
-                </div>
-            </li>
-        </ul>        
+        </ul>
+        <button class="button" @click="getMore">{{ pageNo > 10 ? "没有更多数据了" : "加载更多" }}</button>        
     </div>
 </template>
 <script>
+import { Lazyload } from 'mint-ui'
+import { Toast } from "mint-ui"
+import api from '../../../api/api'
 import BScroll from "better-scroll"
 import Header from '../../../common/Header'
 export default {
     data () {
         return {
-            goodsList: [
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-                {
-                    icon: require('../../../assets/img/index/1.png'),
-                    title: "童鞋男童皮鞋2018豆豆鞋单鞋潮款韩版休闲宝定皮鞋春秋季英伦新款",
-                    firstPrice: "199",
-                    nowPrice: "100"
-                },
-            ]
+            goodsList: [],
+            bottomGoodsList: [],
+            pageNo: 1
         };
     },
     components:{
         'v-header': Header,
     },
+    created() {
+        this.getContent();
+    },
     mounted() {
-        this.InitGoodsListScroll();
+        let that = this;
+        setTimeout(function(){
+            that.InitGoodsListScroll();
+        }, 1000);
     },
     methods: {
+        getContent: function () {
+            api.get("/fox/app/home/groupBuyingGoods",{
+              params:{
+                USER_ID: "EeThqo"
+              }
+            }).then(
+              (response)=>{
+                this.goodsList = response.data.content.groupBuyingTopGoods
+                this.bottomGoodsList = this.bottomGoodsList.concat(response.data.content.groupBuyingBottomGoods)
+              },
+              (error)=>{
+                  Toast("加载失败。。。");
+              }
+            );
+        },
         InitGoodsListScroll(){
-            let width=0
+            let width=165
             for (let i = 0; i <this.goodsList.length; i++) {
                  width+=this.$refs.goodList[0].getBoundingClientRect().width; //getBoundingClientRect() 返回元素的大小及其相对于视口的位置
             }
-            this.$refs.goodsCon.style.width=width+'vw'
+            this.$refs.goodsCon.style.width=width+'px'
             this.$nextTick(()=>{
                 if (!this.scroll) {
                     this.scroll=new BScroll(this.$refs.hotGoods, {
@@ -135,6 +109,10 @@ export default {
                     this.scroll.refresh()
                 }
             });
+        },
+        getMore() {
+            this.pageNo++;
+            this.getContent();
         },
     }
 }
@@ -164,7 +142,7 @@ export default {
     }
     .hotGoods {
         width: 100%;
-        height: 52vw;
+        height: 56vw;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         &::-webkit-scrollbar {display:none}
@@ -175,12 +153,12 @@ export default {
             li {
                 display: inline-block;
                 width: 36vw;
-                height: 50vw;
+                height: 56vw;
                 background: #fff;
                 margin-right: 2vw;
                 img {
                     width: 100%;
-                    height: 28vw;
+                    height: 34vw;
                 }
                 p {
                     font-size: 4vw;
@@ -201,7 +179,7 @@ export default {
                 }
                 span {
                     float: left;
-                    font-size: 4vw;
+                    font-size: 3.5vw;
                     font-weight: 600;
                     color: #ff3333;
                     margin-top: 1vw;
@@ -227,7 +205,7 @@ export default {
         li {
           margin-right: 1vw;
           width: 49.4%;
-          height: 70vw;
+          height: 74vw;
           float: left;
           margin-bottom: 2vw;
           border-radius: 5px;
@@ -235,7 +213,7 @@ export default {
           img {
             display: block;
             width: 100%;
-            height: 40vw;
+            height: 44vw;
             border-radius: 5px;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
@@ -245,14 +223,15 @@ export default {
             .top {
               img {
                 float: left;
-                width: 10%;
+                width: 12%;
                 height: 4vw;
-                margin-right: 3%;
+                margin-right: 2%;
+                margin-top: 1vw;
               }
               p {
                 font-size: 4vw;
                 color: #333;
-                width: 85%;
+                width: 83%;
                 overflow: hidden;
                 text-overflow:ellipsis;
                 white-space: nowrap;
@@ -265,7 +244,7 @@ export default {
             }
             .bottom {
                 overflow: hidden;
-                margin-top: 2vw;
+                margin-top: 1vw;
                 span {
                     float: left;
                     font-size: 4vw;
@@ -274,33 +253,46 @@ export default {
                 .price {
                     font-weight: 600;
                 }
-                p {
-                    float: right;
-                    width: 28%;
-                    text-align: center;
-                    height: 6vw;
-                    line-height: 6vw;
-                    font-size: 3vw;
-                    color: #fff;
-                    background: #ff0000;
-                }
+                
             }
-            .evaluate {
+            .spell {
+                float: right;
+                width: 28%;
+                text-align: center;
+                height: 6vw;
+                line-height: 6vw;
+                font-size: 3vw;
+                color: #fff;
+                background: #ff0000;
                 margin-top: 2vw;
-                span {
-                    float: left;
-                    font-size: 3vw;
-                    color: #999;
-                }
-                .num {
-                    margin-right: 2vw;
-                }
             }
+            // .evaluate {
+            //     margin-top: 2vw;
+            //     span {
+            //         float: left;
+            //         font-size: 3vw;
+            //         color: #999;
+            //     }
+            //     .num {
+            //         margin-right: 2vw;
+            //     }
+            // }
           }
         }
         li:nth-child(2n) {
           margin-right: 0;
         }
+    }
+    .button {
+        width: 60%;
+        text-align: center;
+        margin-left: 20%;
+        height: 10vw;
+        font-size: 4vw;
+        line-height: 10vw;
+        background: #f0306f;
+        color: #fff;
+        margin-bottom: 2vw;
     }
 }
 </style>

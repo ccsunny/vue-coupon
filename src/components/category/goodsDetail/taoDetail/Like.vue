@@ -6,7 +6,7 @@
     <ul>
       <li v-for="(t,index) in goodsList">
         <router-link :to="`/taoDetail?NUM_IID=${t.NUM_IID}`" @click.native="refresh">
-          <img class="left" v-lazy="t.PICT_URL"/>
+          <img class="left" :src="t.PICT_URL"/>
           <div class="right">
             <div class="r-top">
               <img :src=" t.USER_TYPE == 1 ? require('../../../../assets/img/category/tm.png') : require('../../../../assets/img/category/tb.png')"/>
@@ -63,10 +63,10 @@ export default {
   }
   ul {
     margin-top: 4vw;
+    padding: 0 2vw;
     li {
-      width: 94%;
+      width: 100%;
       height: 30vw;
-      margin: 0 auto;
       background: #fff;
       margin-bottom: 2vw;
       .left {
@@ -76,8 +76,8 @@ export default {
       }
       .right {
         float: left;
-        width: 65%;
-        margin-left: 1%;
+        width: 64%;
+        margin-left: 2%;
         .r-top {
           width: 100%;
           height: 8vw;

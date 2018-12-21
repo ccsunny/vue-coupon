@@ -3,14 +3,9 @@ import store from '@/vuex/store.js'
 import router from '../router'
 
 const api = axios.create();
-// 判断是否测试和生产环境
-if(process.env.NODE_ENV === "development"){
-  api.defaults.baseURL = 'http://47.106.88.54:8080';
-  store.dispatch('set_shop_url','http://test.syb111.com')
-}else{
-  api.defaults.baseURL = 'http://101.37.19.123:8080';
-  store.dispatch('set_shop_url','http://www.syb111.com')
-}
+// 测试环境
+api.defaults.baseURL = 'http://47.106.88.54:8080'
+store.dispatch('set_shop_url','http://test.syb111.com')
 
 api.defaults.timeout = 5000;
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -22,7 +17,7 @@ api.interceptors.request.use(function (config) {
       'Content-Type' : 'application/x-www-form-urlencoded'
     }
     // 在发送请求之前做些什么
-    store.commit('SET_LOADING',true);
+      store.commit('SET_LOADING',true);
     // 如果有token,添加到请求报文 后台会根据该报文返回status
     if(store.state.login.token) {
       config.headers.Authorization = `token ${store.state.login.token}`;
@@ -33,7 +28,7 @@ api.interceptors.request.use(function (config) {
   }, function (error) {
     // 对请求错误做些什么
     alert('网络错误,请稍后再试');
-    store.commit('SET_LOADING',false);
+    // store.commit('SET_LOADING',false);
     return Promise.reject(error);
   });
 
@@ -43,7 +38,7 @@ api.interceptors.response.use(function (response) {
     // 加到时器主要是为了 展示Loading效果 项目中应去除
     setTimeout(()=>{
       store.commit('SET_LOADING',false);
-    },300)
+    },500)
 
     return response;
 

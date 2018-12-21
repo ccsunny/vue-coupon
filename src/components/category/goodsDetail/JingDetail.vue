@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     getContent: function () {
-      api.get("/fox/app/interFaceAppController/getJdGoodsLink",{
+      api.get("/fox/app/jdzsController/getJdGoodsDetail",{
         params:{
           gid: this.$route.query.goods_id,
           USER_ID: "EeThqo"
@@ -52,15 +52,29 @@ export default {
         (response)=>{
           this.data = response.data.content.data
           this.jingDetail = response.data.content.data
-          this.coupon = response.data.content.data
-          let goodsName = response.data.content.data.goods_name
+          let cid3 = response.data.content.data.cid3
+          let discount_link = response.data.content.data.discount_link
           api.get("/fox/app/interFaceAppController/getJdGoodsList",{
             params:{
-              so: goodsName
+              cid3: cid3
               }
             }).then(
             (res)=>{
               this.goodLists = res.data.content.data
+              api.get("/fox/app/jdzsController/jdTwoInOneLink",{
+                params:{
+                  coupon_url: discount_link,
+                  gid: this.$route.query.goods_id,
+                  USER_ID: "EeThqo",
+                }
+              }).then(
+                (response)=>{
+                  this.coupon = response.data.content
+                },
+                (error)=>{
+                    Toast("加载失败。。。");
+                }
+              );
             },
             (error)=>{
                 Toast("加载失败。。。");
@@ -84,7 +98,7 @@ export default {
   background: #eee;
   .banner-img {
       width: 100%;
-      height: 80vw;
+      height: 98vw;
       img {
           width: 100%;
           height: 100%;

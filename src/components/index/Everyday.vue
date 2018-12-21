@@ -5,48 +5,24 @@
     </div>
     <div class="top">
       <ul>
-        <li class="buy">
-          <div class="top-t"><img src="../../assets/img/index/ppsg.png"/></div>
-          <p>产品名称</p>
-          <img class="old" src="../../assets/img/index/3-1.png"/>
-        </li>
-        <li class="buy-more">
-          <div class="top-t"><img src="../../assets/img/index/phb.png"/></div>
-          <p class="buy-w">看看大家都在买什么</p>
-          <ul>
-            <li>
-              <img src="../../assets/img/index/phone.png"/>
-              <p class="price">￥2220</p>
-              <p><del>￥3000</del></p>
-            </li>
-            <li>
-              <img src="../../assets/img/index/fs.png"/>
-              <p class="price">￥45</p>
-              <p><del>￥95</del></p>
-            </li>
-          </ul>
+        <li v-for="k in everydayList.everybodyTopGoodsList">
+          <router-link :to="k.goodsType == 2 ? `/jingDetail?goods_id=${k.goodsId}` : `/taoDetail?NUM_IID=${k.goodsId}`">
+            <img v-lazy="k.goodsImgUrl"/>
+            <p>{{k.goodsName}}</p>
+            <span>￥{{k.goodsDiscountPrice}}</span>
+          </router-link>
         </li>
       </ul>
     </div>
-    <div class="bottom">
-      <ul>
-        <li>
-          <img src="../../assets/img/index/1.png"/>
-          <p class="title">洗面奶套装</p>
-          <p class="volume">22233人已买</p>
-          <p class="money">￥46</p>
-        </li>
-        <li>
-          <img src="../../assets/img/index/1-1.png"/>
-          <p class="title">洗面奶套装</p>
-          <p class="volume">22233人已买</p>
-          <p class="money">￥46</p>
-        </li>
-        <li>
-          <img src="../../assets/img/index/1-2.png"/>
-          <p class="title">洗面奶套装</p>
-          <p class="volume">22233人已买</p>
-          <p class="money">￥46</p>
+    <div class="hotGoods" ref="hotGoods">
+      <ul class="goodsCon" ref="goodsCon">
+        <li v-for="item in everydayList.everybodyContentGoodsList" ref="goodList">
+          <router-link :to="item.goodsType == 2 ? `/jingDetail?goods_id=${item.goodsId}` : `/taoDetail?NUM_IID=${item.goodsId}`">
+            <img v-lazy="item.goodsImgUrl"/>
+            <p class="title">{{item.goodsName}}</p>
+            <p class="volume">{{item.goodsVolume}}人已买</p>
+            <p class="money">￥{{item.goodsDiscountPrice}}</p>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -54,12 +30,47 @@
 </template>
 
 <script>
-import { Lazyload } from 'mint-ui';
+import { Lazyload } from 'mint-ui'
+import BScroll from "better-scroll"
 export default {
- data () {
+  data () {
     return {
     };
   },
+  props: {
+    everydayList: {
+      type: Object,
+      required: true
+    }
+  },
+  mounted() {
+    let that = this;
+    setTimeout(function(){
+        that.InitGoodsListScroll();
+    }, 1000);
+  },
+  methods: {
+    InitGoodsListScroll(){
+      let width=0
+      for (let i = 0; i <this.everydayList.everybodyContentGoodsList.length; i++) {
+           width+=this.$refs.goodList[0].getBoundingClientRect().width; //getBoundingClientRect() 返回元素的大小及其相对于视口的位置
+      }
+      this.$refs.goodsCon.style.width=width+'px'
+      this.$nextTick(()=>{
+          if (!this.scroll) {
+              this.scroll=new BScroll(this.$refs.hotGoods, {
+                  startX:0,
+                  click:true,
+                  scrollX:true,
+                  scrollY:false,
+                  eventPassthrough:'vertical'
+              });
+          }else{
+              this.scroll.refresh()
+          }
+      });
+    },
+  }
 }
 </script>
 
@@ -68,15 +79,14 @@ li {
   background: #fff;
 }
 .section4 {
-  padding: 0 2vw;
   padding-top: 3vw;
   .stroll {
     width: 100%;
-    height: 5vw;
+    height: 6vw;
     margin-bottom: 3vw;
     img {
       display: block;
-      width: 50%;
+      width: 52%;
       height: 100%;
       margin: 0 auto;
     }
@@ -105,71 +115,63 @@ li {
     ul {
       width: 100%;
       height: 44vw;
+      text-align: center;
+      background: #fff;
       li {
+        float: left;
         width: 50%;
         height: 100%;
-        .old {
-          display: block;
-          width: 30vw;
-          height: 27vw;
+        padding-top: 6vw;
+        box-sizing: border-box;
+        position: relative;
+        img {
+          width: 52%;
+          height: 22vw;
+        }
+        p{
+          width: 64%;
           margin: 0 auto;
-          margin-top: 2vw;
-        }
-        ul {
-          width: 100%;
-          height: 30vw;
-          li {
-            width: 50%;
-            height: 27vw;
-            margin-top: 2vw;
-            img {
-              width: 100%;
-              height: 20vw;
-            }
-            span {
-              font-size: 3.2vw;
-              color: #f0306f;
-              margin-left: 2vw;
-            }
-            del {
-              font-size: 2.8vw;
-              color: #999;
-            }
-          }
-        }
-      }
-      .buy {
-        width: 49%;
-        border-right: 1px solid #eee;
-      }
-      .buy-more {
-        p {
-          margin: 0;
-          text-align: center;
-          line-height: 4vw;
-        }
-        .price {
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
           font-size: 4vw;
-          font-weight: 600;
+          color: #333;
+          margin-top: 2vw;
+        }
+        span {
+          font-size: 4vw;
           color: #f0306f;
-          margin-top: 2vw;
+          font-weight: 600;
         }
-        .buy-w {
-          text-align: left;
-          margin-top: 2vw;
-          margin-left: 2vw;
-        }
+      }
+      li:after {
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: 0;
+        width: 1px;
+        height: 80%;
+        background: #eee;
       }
     }
   }
-  .bottom {
+  .hotGoods {
     border-top: 1px solid #eee;
-    ul {
-      width: 100%;
-      height: 42vw;
+    width: 100%;
+    height: 44vw;
+    background: #fff;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {display:none}
+    touch-action: none;
+    .goodsCon{
+      height: 100%;
+      background: #fff;
       li {
-        width: 33%;
+        width: 33.5vw;
         height: 100%;
+        padding: 2vw;
+        box-sizing: border-box;
         position: relative;
         img {
           width: 100%;
@@ -181,6 +183,10 @@ li {
           text-align: center;
         }
         .title {
+          width: 100%;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
           font-size: 4vw;
           color: #333; 
           margin-top: 2vw;
@@ -203,8 +209,8 @@ li {
         height: 80%;
         background: #eee;
       }
-      li:nth-child(3):after {
-        display: none;
+      li:last-child:after {
+        width: 0;
       }
     }
   }

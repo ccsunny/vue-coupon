@@ -6,7 +6,7 @@
     <div class="search-button">
       <div class="mint-searchbar-inner">
         <i class="mintui mintui-search"></i>
-        <input type="search" placeholder="粘贴或输入要查询的商品名称搜索" v-model="keyword" class="mint-searchbar-core" autofocus="autofocus">
+        <input type="search" placeholder="粘贴或输入要查询的商品名称搜索" v-model="keyword" class="mint-searchbar-core">
       </div>
       <button @click="taoSearch"><router-link :to="keyword ==''? '':`/searchDetail?q=${keyword}`">搜索</router-link></button>
     </div>

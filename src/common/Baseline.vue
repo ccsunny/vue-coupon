@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>没有更多数据了 -.-</div>
+  <div>已经到底了，没有更多数据了</div>
 
 </template>
 
@@ -9,14 +9,15 @@
 
 <style lang="less" scoped>
   div {
-    padding: 8vw 0;
+    width: 100%;
+    height: 10vw;
+    line-height: 10vw;
     text-align: center;
     letter-spacing: .2vw;
-    color: rgb(158, 158, 158);
-    font-family: Lato, "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: #999;
     font-weight: 600;
     font-size: 4vw;
     background: #eee;
-    padding-bottom: 15vw;
+    margin-bottom: 2vw;
   }
 </style>

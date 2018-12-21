@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <img src="../../assets/img/index/icon/icon-me.png"/>
-                <p>每日任务</p>
+                <p>签到领钱</p>
             </li>
             <li>
                 <router-link to="/newPerson">

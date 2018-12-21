@@ -1,8 +1,8 @@
 <template>
     <div class="fans-content">
-        <div class="header">
+    <!--    <div class="header">
             <h1>粉丝社区</h1>
-        </div>
+        </div>-->
         <v-share></v-share>
         <mt-tabbar/>
     </div>
@@ -26,7 +26,6 @@ export default {
     width: 100%;
     height: 100%;
     background: #eee;
-    padding-top: 12vw;
     .header {
         width: 100%;
         text-align: center;

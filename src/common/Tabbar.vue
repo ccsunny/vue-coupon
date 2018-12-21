@@ -56,8 +56,6 @@ export default {
 </script>
 <style lang="less" scoped>
 .tabbar {
-  // width: 100%;
-  // height: 100%;
   .mint-tabbar {
     height: 14.5vw;
     background-color: #fff;

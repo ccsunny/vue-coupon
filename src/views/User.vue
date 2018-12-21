@@ -1,18 +1,21 @@
 <template lang="html">
   <div class="car">
-    <div class="header-icon">
-      <img src="../assets/img/tabbar/user.png"/>
-    </div>
-    <p class="userName">嘻嘻哈哈</p>
-    <div class="detail">
-      <p>省一波给您带来不一样的省钱攻略,</p>
-      <p>玩转自购省钱、分享赚钱等省钱方式,</p>
-      <p>现金红包领不停,快来一起省钱吧</p>
-    </div>
-    <div class="download" @click="download">下载APP</div>
-    <div class="consult">
-      <img src="../assets/img/user/ewm.png"/>
-      <p>省一波客服</p>
+    <img class="banner" src="../assets/img/user/background.png"/>
+    <div class="container">
+      <div class="header-icon">
+        <img src="../assets/img/tabbar/user.png"/>
+      </div>
+      <p class="userName">嘻嘻哈哈</p>
+      <div class="detail">
+        <p>省一波给您带来不一样的省钱攻略,</p>
+        <p>玩转自购省钱、分享赚钱等省钱方式,</p>
+        <p>现金红包领不停,快来一起省钱吧</p>
+      </div>
+      <div class="download" @click="download">下载APP</div>
+      <div class="consult">
+        <img src="../assets/img/user/ewm.png"/>
+        <p>省一波客服</p>
+      </div>
     </div>
     <mt-tabbar/>
   </div>
@@ -45,62 +48,81 @@ export default {
 .car {
   width: 100%;
   height: 100%;
-  background-image: url(../assets/img/user/background.png);
-  background-size: 100% 100%;
-  padding-top: 34vw;
   box-sizing: border-box;
-  .header-icon {
-      background-color: #333;
-      -webkit-box-sizing: border-box;
+  .banner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .container {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    bottom: 10%;
+    width: 100%;
+    .header-icon {
+        background-color: #333;
+        width: 16vw;
+        height: 15vw;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 15vw;
+        border-radius: 50%;
+        box-sizing: border-box;
+        img{
+          width: 10vw;
+          height: 10vw;
+        }
+    }
+    .userName {
+        color: #333;
+        font-size: 4vw;
+        width: 100%;
+        text-align: center;
+        height: 4%;
+        margin-top: 1%;
+    }
+    .detail {
+      width: 66%;
+      margin: 0 auto;
+      margin-top: 4%;
+      height: 18%;
+      p {
+        font-size: 4vw;
+        color: #999;
+        height: 33.3%;
+      }
+    }
+    .download {
+      width: 62%;
+      font-size: 5vw;
+      margin: 0 auto;
+      height: 12vw;
+      background-image: url(../assets/img/user/button.png);
+      background-size: 100% 100%;
+      text-align: center;
+      color: #fff;
+      margin-top: 4%;
+      line-height: 11vw;
       box-sizing: border-box;
-      width: 18vw;
-      height: 18vw;
-      margin: 0 auto;
-      line-height: 18vw;
-      text-align: center;
-      border-radius: 50%;
-  }
-  .userName {
-      color: #333;
-      font-size: 4vw;
+    }
+    .consult {
+      margin-top: 8%;
       width: 100%;
-      text-align: center;
-      line-height: 6vw;
-  }
-  .detail {
-    width: 66%;
-    margin: 0 auto;
-    margin-top: 6vw;
-    p {
-      font-size: 4vw;
-      color: #999;
-      line-height: 7vw;
-    }
-  }
-  .download {
-    width: 62%;
-    font-size: 5vw;
-    margin: 0 auto;
-    height: 12vw;
-    background-image: url(../assets/img/user/button.png);
-    background-size: 100% 100%;
-    text-align: center;
-    line-height: 11vw;
-    color: #fff;
-    margin-top: 10vw;
-  }
-  .consult {
-    margin-top: 8vw;
-    img {
-      display: block;
-      width: 40%;
-      height: 40vw;
-      margin: 0 auto;
-    }
-    p {
-      font-size: 3vw;
-      color: #333;
-      text-align: center;
+      height: 36%;
+      img {
+        display: block;
+        width: 40%;
+        height: 38vw;
+        margin: 0 auto;
+      }
+      p {
+        height: 12%;
+        font-size: 3vw;
+        color: #333;
+        text-align: center;
+        margin-top: 1%;
+      }
     }
   }
 }
