@@ -27,94 +27,76 @@ import axios from 'axios'
   export default {
     data () {
       return {
-        classList: ["百货","电脑","电器","家纺","家具","家装","健康","美妆","母婴","男装","内衣","女装","汽车","食品","手机","水果","鞋包","运动"],
+        classList: ["百货","家电","家居","男鞋","女鞋","配饰","数码","箱包","美妆","母婴","男装","内衣","女装","汽车","食品","运动"],
         goodsList:[
           [
             {
-              className:"珠宝饰品",
-              icon: require('../../assets/img/category/list/hundred/1.png')
+              className:"办公用品",
+              icon: require('../../assets/img/category/list/hundred/1.jpg')
             },
             {
-              className:"纸品湿巾",
+              className:"办公桌椅",
               icon: require('../../assets/img/category/list/hundred/2.png')
             },
             {
-              className:"洗护清洁",
+              className:"成人用品",
               icon: require('../../assets/img/category/list/hundred/3.png')
             },
             {
-              className:"图书乐器",
+              className:"家庭清洁",
               icon: require('../../assets/img/category/list/hundred/4.png')
             },
             {
-              className:"水杯餐具",
-              icon: require('../../assets/img/category/list/hundred/5.png')
+              className:"居家用品",
+              icon: require('../../assets/img/category/list/hundred/5.jpg')
             },
             {
-              className:"收纳整理",
-              icon: require('../../assets/img/category/list/hundred/6.png')
-            },
-            {
-              className:"日用百货",
-              icon: require('../../assets/img/category/list/hundred/7.png')
+              className:"乐器",
+              icon: require('../../assets/img/category/list/hundred/6.jpg')
             },
             {
               className:"绿植园艺",
-              icon: require('../../assets/img/category/list/hundred/8.png')
+              icon: require('../../assets/img/category/list/hundred/7.png')
             },
             {
-              className:"家庭清洁",
-              icon: require('../../assets/img/category/list/hundred/9.png')
+              className:"毛巾、浴巾",
+              icon: require('../../assets/img/category/list/hundred/8.jpg')
             },
             {
-              className:"厨房用品",
-              icon: require('../../assets/img/category/list/hundred/10.png')
+              className:"棋牌",
+              icon: require('../../assets/img/category/list/hundred/9.jpg')
             },
             {
-              className:"宠物用品",
+              className:"驱蚊灭虫",
+              icon: require('../../assets/img/category/list/hundred/10.jpg')
+            },
+            {
+              className:"日用百货",
               icon: require('../../assets/img/category/list/hundred/11.png')
             },
             {
-              className:"成人用品",
+              className:"收纳整理",
               icon: require('../../assets/img/category/list/hundred/12.png')
-            }
-          ],
-          [
-            {
-              className:"办公设备",
-              icon: require('../../assets/img/category/list/computer/1.png')
             },
             {
-              className:"笔类",
-              icon: require('../../assets/img/category/list/computer/2.png')
+              className:"图书阅读",
+              icon: require('../../assets/img/category/list/hundred/13.png')
             },
             {
-              className:"电脑整机",
-              icon: require('../../assets/img/category/list/computer/3.png')
-            },
-            {
-              className:"平板电脑",
-              icon: require('../../assets/img/category/list/computer/4.png')
-            },
-            {
-              className:"外设配件",
-              icon: require('../../assets/img/category/list/computer/5.png')
-            },
-            {
-              className:"网络设备",
-              icon: require('../../assets/img/category/list/computer/6.png')
+              className:"洗护清洁",
+              icon: require('../../assets/img/category/list/hundred/14.png')
             },
             {
               className:"学生文具",
-              icon: require('../../assets/img/category/list/computer/7.png')
+              icon: require('../../assets/img/category/list/hundred/15.jpg')
             },
             {
-              className:"学习机",
-              icon: require('../../assets/img/category/list/computer/8.png')
+              className:"音像制品",
+              icon: require('../../assets/img/category/list/hundred/16.jpg')
             },
             {
-              className:"游戏设备",
-              icon: require('../../assets/img/category/list/computer/9.png')
+              className:"纸品湿巾",
+              icon: require('../../assets/img/category/list/hundred/17.png')
             }
           ],
           [
@@ -153,143 +135,275 @@ import axios from 'axios'
             {
               className:"洗衣机",
               icon: require('../../assets/img/category/list/electric/9.png') 
+            },
+            {
+              className:"耳机_耳麦",
+              icon: require('../../assets/img/category/list/electric/10.png') 
+            },
+            {
+              className:"音响_音箱",
+              icon: require('../../assets/img/category/list/electric/11.png') 
             }
           ],
           [
             {
-              className:"被子被芯",
-              icon: require('../../assets/img/category/list/textiles/1.png') 
+              className:"保温杯",
+              icon: require('../../assets/img/category/list/home/1.png') 
             },
             {
-              className:"床单被套",
-              icon: require('../../assets/img/category/list/textiles/2.png') 
+              className:"餐具",
+              icon: require('../../assets/img/category/list/home/2.jpg') 
             },
             {
-              className:"地毯窗帘",
-              icon: require('../../assets/img/category/list/textiles/3.png') 
+              className:"茶具",
+              icon: require('../../assets/img/category/list/home/3.jpg') 
             },
             {
-              className:"冬上新",
-              icon: require('../../assets/img/category/list/textiles/4.png') 
+              className:"厨房工具",
+              icon: require('../../assets/img/category/list/home/4.jpg') 
             },
             {
-              className:"家居饰品",
-              icon: require('../../assets/img/category/list/textiles/5.png') 
+              className:"厨房用品",
+              icon: require('../../assets/img/category/list/home/5.jpg') 
             },
             {
-              className:"毛巾沙发垫",
-              icon: require('../../assets/img/category/list/textiles/6.png') 
-            },
-            {
-              className:"毛毯床垫",
-              icon: require('../../assets/img/category/list/textiles/7.png') 
-            },
-            {
-              className:"四件套",
-              icon: require('../../assets/img/category/list/textiles/8.png') 
-            },
-            {
-              className:"枕芯枕套",
-              icon: require('../../assets/img/category/list/textiles/9.png') 
-            }
-          ],
-          [
-            {
-              className:"办公家具",
-              icon: require('../../assets/img/category/list/furniture/1.png')   
-            },
-            {
-              className:"餐桌电脑桌",
-              icon: require('../../assets/img/category/list/furniture/2.png')   
-            },
-            {
-              className:"床和床垫",
-              icon: require('../../assets/img/category/list/furniture/3.png')   
+              className:"床上用品",
+              icon: require('../../assets/img/category/list/home/6.png') 
             },
             {
               className:"儿童家具",
-              icon: require('../../assets/img/category/list/furniture/4.png')   
+              icon: require('../../assets/img/category/list/home/7.png') 
             },
             {
               className:"柜子架子",
-              icon: require('../../assets/img/category/list/furniture/5.png')   
+              icon: require('../../assets/img/category/list/home/8.png') 
             },
             {
               className:"户外家具",
-              icon: require('../../assets/img/category/list/furniture/6.png')   
+              icon: require('../../assets/img/category/list/home/9.png') 
+            },
+            {
+              className:"家具",
+              icon: require('../../assets/img/category/list/home/10.png') 
+            },
+            {
+              className:"家装",
+              icon: require('../../assets/img/category/list/home/11.png') 
+            },
+            {
+              className:"酒具",
+              icon: require('../../assets/img/category/list/home/12.jpg') 
+            },
+            {
+              className:"开关插座",
+              icon: require('../../assets/img/category/list/home/13.jpg') 
             },
             {
               className:"沙发电视柜",
-              icon: require('../../assets/img/category/list/furniture/7.png')   
-            },
-            {
-              className:"学习桌",
-              icon: require('../../assets/img/category/list/furniture/8.png')   
-            },
-            {
-              className:"椅子凳子",
-              icon: require('../../assets/img/category/list/furniture/9.png')   
-            }
-          ],
-          [
-            {
-              className:"厨房",
-              icon: require('../../assets/img/category/list/decoration/1.png') 
-            },
-            {
-              className:"灯饰照明",
-              icon: require('../../assets/img/category/list/decoration/2.png') 
-            },
-            {
-              className:"电工电料",
-              icon: require('../../assets/img/category/list/decoration/3.png') 
-            },
-            {
-              className:"基础建筑",
-              icon: require('../../assets/img/category/list/decoration/4.png') 
-            },
-            {
-              className:"监控安装",
-              icon: require('../../assets/img/category/list/decoration/5.png') 
-            },
-            {
-              className:"墙地面",
-              icon: require('../../assets/img/category/list/decoration/6.png') 
-            },
-            {
-              className:"全屋定制",
-              icon: require('../../assets/img/category/list/decoration/7.png') 
-            },
-            {
-              className:"卫浴用品",
-              icon: require('../../assets/img/category/list/decoration/8.png') 
+              icon: require('../../assets/img/category/list/home/14.png') 
             },
             {
               className:"五金工具",
-              icon: require('../../assets/img/category/list/decoration/9.png') 
-            }
+              icon: require('../../assets/img/category/list/home/15.png') 
+            },
+            {
+              className:"学习桌",
+              icon: require('../../assets/img/category/list/home/16.png') 
+            },
+            {
+              className:"一次性用品",
+              icon: require('../../assets/img/category/list/home/17.jpg') 
+            },
+            {
+              className:"椅子凳子",
+              icon: require('../../assets/img/category/list/home/18.png') 
+            },
+            {
+              className:"艺术品",
+              icon: require('../../assets/img/category/list/home/19.jpg') 
+            },
+            {
+              className:"装修建材",
+              icon: require('../../assets/img/category/list/home/20.png') 
+            },
           ],
           [
             {
-              className:"家庭常备",
-              icon: require('../../assets/img/category/list/health/1.png') 
+              className:"低帮鞋男",
+              icon: require('../../assets/img/category/list/menShoes/1.jpg') 
             },
             {
-              className:"时令应季",
-              icon: require('../../assets/img/category/list/health/2.png') 
+              className:"高帮鞋男",
+              icon: require('../../assets/img/category/list/menShoes/2.jpg') 
             },
             {
-              className:"医药器械",
-              icon: require('../../assets/img/category/list/health/3.png') 
+              className:"皮鞋男",
+              icon: require('../../assets/img/category/list/menShoes/3.jpg') 
             },
             {
-              className:"隐形眼睛",
-              icon: require('../../assets/img/category/list/health/4.png') 
+              className:"休闲鞋男",
+              icon: require('../../assets/img/category/list/menShoes/4.jpg') 
             },
             {
-              className:"中西药品",
-              icon: require('../../assets/img/category/list/health/5.png') 
-            }
+              className:"靴子男",
+              icon: require('../../assets/img/category/list/menShoes/5.jpg') 
+            },
+          ],
+          [
+            {
+              className:"低帮鞋女",
+              icon: require('../../assets/img/category/list/girlShoes/1.png') 
+            },
+            {
+              className:"雪地靴女",
+              icon: require('../../assets/img/category/list/girlShoes/2.png') 
+            },
+            {
+              className:"帆布鞋女",
+              icon: require('../../assets/img/category/list/girlShoes/3.png') 
+            },
+            {
+              className:"高帮鞋女",
+              icon: require('../../assets/img/category/list/girlShoes/4.png') 
+            },
+            {
+              className:"高跟鞋",
+              icon: require('../../assets/img/category/list/girlShoes/5.png') 
+            },
+            {
+              className:"皮鞋女",
+              icon: require('../../assets/img/category/list/girlShoes/6.png') 
+            },
+            {
+              className:"靴子女",
+              icon: require('../../assets/img/category/list/girlShoes/7.png') 
+            },
+          ],
+          [
+            {
+              className:"服装配饰",
+              icon: require('../../assets/img/category/list/accessory/1.jpg') 
+            },
+            {
+              className:"贵重饰品",
+              icon: require('../../assets/img/category/list/accessory/2.jpg') 
+            },
+            {
+              className:"时尚饰品",
+              icon: require('../../assets/img/category/list/accessory/3.jpg') 
+            },
+            {
+              className:"手表",
+              icon: require('../../assets/img/category/list/accessory/4.png') 
+            },
+            {
+              className:"烟具",
+              icon: require('../../assets/img/category/list/accessory/5.jpg') 
+            },
+            {
+              className:"眼镜",
+              icon: require('../../assets/img/category/list/accessory/6.jpg') 
+            },
+          ],
+          [
+            {
+              className:"MP3",
+              icon: require('../../assets/img/category/list/numCode/1.jpg') 
+            },
+            {
+              className:"U盘",
+              icon: require('../../assets/img/category/list/numCode/2.jpg') 
+            },
+            {
+              className:"笔记本",
+              icon: require('../../assets/img/category/list/numCode/3.jpg') 
+            },
+            {
+              className:"充电宝",
+              icon: require('../../assets/img/category/list/numCode/4.png') 
+            },
+            {
+              className:"充电线_器",
+              icon: require('../../assets/img/category/list/numCode/5.png') 
+            },
+            {
+              className:"电池",
+              icon: require('../../assets/img/category/list/numCode/6.jpg') 
+            },
+            {
+              className:"耳机_耳麦",
+              icon: require('../../assets/img/category/list/numCode/7.png') 
+            },
+            {
+              className:"镜头",
+              icon: require('../../assets/img/category/list/numCode/8.jpg') 
+            },
+            {
+              className:"路由器",
+              icon: require('../../assets/img/category/list/numCode/9.jpg') 
+            },
+            {
+              className:"闪存卡",
+              icon: require('../../assets/img/category/list/numCode/10.jpg') 
+            },
+            {
+              className:"摄像机",
+              icon: require('../../assets/img/category/list/numCode/11.jpg') 
+            },
+            {
+              className:"手环_手表",
+              icon: require('../../assets/img/category/list/numCode/12.png') 
+            },
+            {
+              className:"手机",
+              icon: require('../../assets/img/category/list/numCode/13.png') 
+            },
+            {
+              className:"手机配件",
+              icon: require('../../assets/img/category/list/numCode/14.jpg') 
+            },
+            {
+              className:"台式电脑",
+              icon: require('../../assets/img/category/list/numCode/15.jpg') 
+            },
+            {
+              className:"相机",
+              icon: require('../../assets/img/category/list/numCode/16.png') 
+            },
+            {
+              className:"游戏机",
+              icon: require('../../assets/img/category/list/numCode/17.jpg') 
+            },
+            {
+              className:"智能生活",
+              icon: require('../../assets/img/category/list/numCode/18.png') 
+            },
+          ],
+          [
+            {
+              className:"旅行箱包",
+              icon: require('../../assets/img/category/list/bag/1.jpg') 
+            },
+            {
+              className:"男包",
+              icon: require('../../assets/img/category/list/bag/2.jpg') 
+            },
+            {
+              className:"女包",
+              icon: require('../../assets/img/category/list/bag/3.png') 
+            },
+            {
+              className:"钱包",
+              icon: require('../../assets/img/category/list/bag/4.jpg') 
+            },
+            {
+              className:"双肩包",
+              icon: require('../../assets/img/category/list/bag/5.png') 
+            },
+            {
+              className:"箱包配件",
+              icon: require('../../assets/img/category/list/bag/6.jpg') 
+            },
           ],
           [
             {
@@ -331,7 +445,7 @@ import axios from 'axios'
           ],
           [
             {
-              className:"冬上新",
+              className:"喂养用品",
               icon: require('../../assets/img/category/list/infant/1.png')
             },
             {
@@ -343,66 +457,94 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/infant/3.png')
             },
             {
-              className:"童装",
-              icon: require('../../assets/img/category/list/infant/4.png')
+              className:"奶粉",
+              icon: require('../../assets/img/category/list/infant/4.jpg')
             },
             {
-              className:"玩具乐器",
+              className:"尿不湿",
               icon: require('../../assets/img/category/list/infant/5.png')
             },
             {
-              className:"学习文具",
+              className:"玩具",
               icon: require('../../assets/img/category/list/infant/6.png')
             },
             {
-              className:"用品湿巾",
+              className:"学习文具",
               icon: require('../../assets/img/category/list/infant/7.png')
             },
             {
-              className:"孕妈专区",
+              className:"婴童服饰",
               icon: require('../../assets/img/category/list/infant/8.png')
             },
             {
-              className:"纸尿裤",
-              icon: require('../../assets/img/category/list/infant/9.png')
+              className:"婴童湿巾",
+              icon: require('../../assets/img/category/list/infant/9.jpg')
+            },
+            {
+              className:"婴童洗护",
+              icon: require('../../assets/img/category/list/infant/10.png')
+            },
+            {
+              className:"孕产用品",
+              icon: require('../../assets/img/category/list/infant/11.png')
             }
           ],
           [
             {
-              className:"衬衫",
-              icon: require('../../assets/img/category/list/men/1.png')
+              className:"衬衫男",
+              icon: require('../../assets/img/category/list/menClothes/1.png')
             },
             {
-              className:"夹克",
-              icon: require('../../assets/img/category/list/men/2.png')
+              className:"夹克男",
+              icon: require('../../assets/img/category/list/menClothes/2.png')
             },
             {
-              className:"毛衫",
-              icon: require('../../assets/img/category/list/men/3.png')
+              className:"毛衫男",
+              icon: require('../../assets/img/category/list/menClothes/3.png')
             },
             {
-              className:"棉服",
-              icon: require('../../assets/img/category/list/men/4.png')
+              className:"棉服男",
+              icon: require('../../assets/img/category/list/menClothes/4.png')
             },
             {
-              className:"牛仔裤",
-              icon: require('../../assets/img/category/list/men/5.png')
+              className:"牛仔裤男",
+              icon: require('../../assets/img/category/list/menClothes/5.png')
             },
             {
-              className:"套装",
-              icon: require('../../assets/img/category/list/men/6.png')
+              className:"套装男",
+              icon: require('../../assets/img/category/list/menClothes/6.png')
             },
             {
-              className:"卫衣",
-              icon: require('../../assets/img/category/list/men/7.png')
+              className:"卫衣男",
+              icon: require('../../assets/img/category/list/menClothes/7.png')
             },
             {
-              className:"休闲裤",
-              icon: require('../../assets/img/category/list/men/8.png')
+              className:"休闲裤男",
+              icon: require('../../assets/img/category/list/menClothes/8.png')
             },
             {
-              className:"羽绒服",
-              icon: require('../../assets/img/category/list/men/9.png')
+              className:"羽绒服男",
+              icon: require('../../assets/img/category/list/menClothes/9.png')
+            },
+            {
+              className:"T恤男",
+              icon: require('../../assets/img/category/list/menClothes/10.jpg')
+            },
+            {
+              className:"爸爸装",
+              icon: require('../../assets/img/category/list/menClothes/11.jpg')
+            },
+            {
+              className:"短裤男",
+              icon: require('../../assets/img/category/list/menClothes/12.jpg')
+            },
+            {
+              className:"毛呢大衣男",
+              icon: require('../../assets/img/category/list/menClothes/13.jpg')
+            },
+            {
+              className:"针织衫男",
+              icon: require('../../assets/img/category/list/menClothes/14.jpg')
             }
           ],
           [
@@ -445,53 +587,93 @@ import axios from 'axios'
           ],
           [
             {
-              className:"打底衫",
-              icon: require('../../assets/img/category/list/girl/1.png')
+              className:"打底衫女",
+              icon: require('../../assets/img/category/list/girlClothes/1.png')
             },
             {
               className:"大码女装",
-              icon: require('../../assets/img/category/list/girl/2.png')
+              icon: require('../../assets/img/category/list/girlClothes/2.png')
             },
             {
-              className:"冬上衣",
-              icon: require('../../assets/img/category/list/girl/3.png')
+              className:"风衣女",
+              icon: require('../../assets/img/category/list/girlClothes/3.jpg')
             },
             {
-              className:"厚外套",
-              icon: require('../../assets/img/category/list/girl/4.png')
+              className:"厚外套女",
+              icon: require('../../assets/img/category/list/girlClothes/4.png')
             },
             {
-              className:"毛呢大衣",
-              icon: require('../../assets/img/category/list/girl/5.png')
+              className:"毛呢大衣女",
+              icon: require('../../assets/img/category/list/girlClothes/5.png')
             },
             {
-              className:"棉衣",
-              icon: require('../../assets/img/category/list/girl/6.png')
+              className:"棉衣女",
+              icon: require('../../assets/img/category/list/girlClothes/6.png')
             },
             {
-              className:"牛仔裤",
-              icon: require('../../assets/img/category/list/girl/7.png')
+              className:"牛仔裤女",
+              icon: require('../../assets/img/category/list/girlClothes/7.png')
             },
             {
-              className:"女裤",
-              icon: require('../../assets/img/category/list/girl/8.png')
+              className:"女休闲裤",
+              icon: require('../../assets/img/category/list/girlClothes/8.png')
             },
             {
               className:"女装",
-              icon: require('../../assets/img/category/list/girl/9.png')
+              icon: require('../../assets/img/category/list/girlClothes/9.png')
             },
             {
-              className:"裙装",
-              icon: require('../../assets/img/category/list/girl/10.png')
+              className:"半身裙",
+              icon: require('../../assets/img/category/list/girlClothes/10.jpg')
             },
             {
-              className:"套装",
-              icon: require('../../assets/img/category/list/girl/11.png')
+              className:"套装女",
+              icon: require('../../assets/img/category/list/girlClothes/11.png')
             },
             {
-              className:"针织毛衣",
-              icon: require('../../assets/img/category/list/girl/12.png')
-            }
+              className:"针织毛衣女",
+              icon: require('../../assets/img/category/list/girlClothes/12.png')
+            },
+            {
+              className:"T恤女",
+              icon: require('../../assets/img/category/list/girlClothes/13.jpg')
+            },
+            {
+              className:"打底裤女",
+              icon: require('../../assets/img/category/list/girlClothes/14.jpg')
+            },
+            {
+              className:"礼服女",
+              icon: require('../../assets/img/category/list/girlClothes/15.jpg')
+            },
+            {
+              className:"连衣裙女",
+              icon: require('../../assets/img/category/list/girlClothes/16.png')
+            },
+            {
+              className:"妈妈装",
+              icon: require('../../assets/img/category/list/girlClothes/17.jpg')
+            },
+            {
+              className:"毛衣女",
+              icon: require('../../assets/img/category/list/girlClothes/18.jpg')
+            },
+            {
+              className:"上衣女",
+              icon: require('../../assets/img/category/list/girlClothes/19.jpg')
+            },
+            {
+              className:"卫衣女",
+              icon: require('../../assets/img/category/list/girlClothes/20.jpg')
+            },
+            {
+              className:"西装裤女",
+              icon: require('../../assets/img/category/list/girlClothes/21.jpg')
+            },
+            {
+              className:"羽绒服女",
+              icon: require('../../assets/img/category/list/girlClothes/22.jpg')
+            },
           ],
           [
             {
@@ -537,7 +719,7 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/food/1.png')
             },
             {
-              className:"茶叶冲饮",
+              className:"谷物冲饮",
               icon: require('../../assets/img/category/list/food/2.png')
             },
             {
@@ -549,7 +731,7 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/food/4.png')
             },
             {
-              className:"农货节",
+              className:"海鲜水产",
               icon: require('../../assets/img/category/list/food/5.png')
             },
             {
@@ -561,155 +743,37 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/food/7.png')
             },
             {
-              className:"营养保健",
+              className:"保健品",
               icon: require('../../assets/img/category/list/food/8.png')
             },
             {
               className:"中外名酒",
               icon: require('../../assets/img/category/list/food/9.png')
-            }
-          ],
-          [
-            {
-              className:"充电宝",
-              icon: require('../../assets/img/category/list/phone/1.png')
-            },
-            {
-              className:"充电线_器",
-              icon: require('../../assets/img/category/list/phone/2.png')
-            },
-            {
-              className:"耳机_耳麦",
-              icon: require('../../assets/img/category/list/phone/3.png')
-            },
-            {
-              className:"壳膜_支架",
-              icon: require('../../assets/img/category/list/phone/4.png')
-            },
-            {
-              className:"手环_手表",
-              icon: require('../../assets/img/category/list/phone/5.png')
-            },
-            {
-              className:"手机",
-              icon: require('../../assets/img/category/list/phone/6.png')
-            },
-            {
-              className:"相机",
-              icon: require('../../assets/img/category/list/phone/7.png')
-            },
-            {
-              className:"音响_音箱",
-              icon: require('../../assets/img/category/list/phone/8.png')
-            },
-            {
-              className:"智能生活",
-              icon: require('../../assets/img/category/list/phone/9.png')
-            }
-          ],
-          [
-            {
-              className:"大闸蟹",
-              icon: require('../../assets/img/category/list/fruits/1.png')
-            },
-            {
-              className:"蛋_蛋制品",
-              icon: require('../../assets/img/category/list/fruits/2.png')
-            },
-            {
-              className:"瓜果桃梨",
-              icon: require('../../assets/img/category/list/fruits/3.png')
-            },
-            {
-              className:"海鲜水产",
-              icon: require('../../assets/img/category/list/fruits/4.png')
-            },
-            {
-              className:"进口优选",
-              icon: require('../../assets/img/category/list/fruits/5.png')
             },
             {
               className:"品质肉禽",
-              icon: require('../../assets/img/category/list/fruits/6.png')
+              icon: require('../../assets/img/category/list/food/10.png')
             },
             {
-              className:"蔬菜_制品",
-              icon: require('../../assets/img/category/list/fruits/7.png')
+              className:"水果蔬菜",
+              icon: require('../../assets/img/category/list/food/11.png')
             },
-            {
-              className:"熟食凉菜",
-              icon: require('../../assets/img/category/list/fruits/8.png')
-            },
-            {
-              className:"新鲜水果",
-              icon: require('../../assets/img/category/list/fruits/9.png')
-            }
           ],
           [
             {
-              className:"低帮鞋",
-              icon: require('../../assets/img/category/list/shoes/1.png')
+              className:"游泳",
+              icon: require('../../assets/img/category/list/sports/1.jpg')
             },
             {
-              className:"冬上新",
-              icon: require('../../assets/img/category/list/shoes/2.png')
-            },
-            {
-              className:"帆布鞋",
-              icon: require('../../assets/img/category/list/shoes/3.png')
-            },
-            {
-              className:"服饰配件",
-              icon: require('../../assets/img/category/list/shoes/4.png')
-            },
-            {
-              className:"高帮鞋",
-              icon: require('../../assets/img/category/list/shoes/5.png')
-            },
-            {
-              className:"男鞋",
-              icon: require('../../assets/img/category/list/shoes/6.png')
-            },
-            {
-              className:"女鞋",
-              icon: require('../../assets/img/category/list/shoes/7.png')
-            },
-            {
-              className:"皮鞋",
-              icon: require('../../assets/img/category/list/shoes/8.png')
-            },
-            {
-              className:"双肩包",
-              icon: require('../../assets/img/category/list/shoes/9.png')
-            },
-            {
-              className:"腕表眼镜",
-              icon: require('../../assets/img/category/list/shoes/10.png')
-            },
-            {
-              className:"箱包皮具",
-              icon: require('../../assets/img/category/list/shoes/11.png')
-            },
-            {
-              className:"靴子",
-              icon: require('../../assets/img/category/list/shoes/12.png')
-            }
-          ],
-          [
-            {
-              className:"垂钓装备",
-              icon: require('../../assets/img/category/list/sports/1.png')
-            },
-            {
-              className:"户外鞋服",
-              icon: require('../../assets/img/category/list/sports/2.png')
+              className:"泳衣",
+              icon: require('../../assets/img/category/list/sports/2.jpg')
             },
             {
               className:"户外装备",
               icon: require('../../assets/img/category/list/sports/3.png')
             },
             {
-              className:"健身器材",
+              className:"户外鞋服",
               icon: require('../../assets/img/category/list/sports/4.png')
             },
             {
@@ -717,19 +781,19 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/sports/5.png')
             },
             {
-              className:"秋冬保暖",
-              icon: require('../../assets/img/category/list/sports/6.png')
+              className:"瑜伽",
+              icon: require('../../assets/img/category/list/sports/6.jpg')
             },
             {
-              className:"体育用品",
+              className:"运动配件",
               icon: require('../../assets/img/category/list/sports/7.png')
             },
             {
-              className:"运动服装",
+              className:"运动鞋服",
               icon: require('../../assets/img/category/list/sports/8.png')
             },
             {
-              className:"运动鞋",
+              className:"运动用具",
               icon: require('../../assets/img/category/list/sports/9.png')
             }
           ]
@@ -794,6 +858,10 @@ import axios from 'axios'
     margin-left: 25%;
     padding: 0 5vw;
     padding-top: 14vw;
+    padding-bottom: 16vw;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {display:none}
     box-sizing: border-box;
     ul {
       li {

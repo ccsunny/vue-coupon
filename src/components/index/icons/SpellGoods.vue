@@ -11,11 +11,13 @@
         <div class="hotGoods" ref="hotGoods">
             <ul class="goodsCon" ref="goodsCon" :style="{width:40*(goodsList.length)+'vw'}">
                 <li v-for="item in goodsList" ref="goodList">
-                    <img v-lazy="item.goodsImgUrl"/>
-                    <p>{{ item.goodsName }}</p>
-                    <del>￥{{ item.goodsPrice }}</del>
-                    <span>拼团价￥{{ item.goodsFinalPrice }}</span>
-                    <img class="spell-con" src="../../../assets/img/index/icon/spellGoods/spell.png"/>
+                    <router-link :to="`/spellDetail?NUM_IID=${item.goodsId}&spellPrice=${item.goodsFinalPrice}&spellLink=${item.generalizeLongLink}`">
+                        <img v-lazy="item.goodsImgUrl"/>
+                        <p>{{ item.goodsName }}</p>
+                        <del>￥{{ item.goodsPrice }}</del>
+                        <span>拼团价￥{{ item.goodsFinalPrice }}</span>
+                        <img class="spell-con" src="../../../assets/img/index/icon/spellGoods/spell.png"/>
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -25,24 +27,26 @@
         </div>
         <ul class="goodsContent">
             <li v-for="k in bottomGoodsList">
-                <img v-lazy="k.goodsImgUrl">
-                <div class="container">
-                  <div class="top">
-                    <img :src=" k.goodsType == 0 ? require('../../../assets/img/category/tb.png') : k.goodsType == 1 ? require('../../../assets/img/category/tm.png') : require('../../../assets/img/category/jd.png')"/>
-                    <p>{{k.goodsName}}</p>
-                  </div>
-                  <div class="middle">原价￥{{k.goodsPrice}}</div>
-                  <div class="bottom">
-                    <span>2人拼团价</span><span class="price">￥{{k.goodsFinalPrice}}</span>
-                  </div>
-                  <p class="spell">去拼团</p>
-                  <!--
-                  <div class="evaluate">
-                    <span class="num">{{k.comments}}条评价</span>
-                    <span>好评{{k.goodCommentsShare}}%</span>
-                  </div>
-                  -->
-                </div>
+                <router-link :to="`/spellDetail?NUM_IID=${k.goodsId}&spellPrice=${k.goodsFinalPrice}&spellLink=${k.generalizeLongLink}`">
+                    <img v-lazy="k.goodsImgUrl">
+                    <div class="container">
+                      <div class="top">
+                        <img :src=" k.goodsType == 0 ? require('../../../assets/img/category/tb.png') : k.goodsType == 1 ? require('../../../assets/img/category/tm.png') : require('../../../assets/img/category/jd.png')"/>
+                        <p>{{k.goodsName}}</p>
+                      </div>
+                      <div class="middle">原价￥{{k.goodsPrice}}</div>
+                      <div class="bottom">
+                        <span>2人拼团价</span><span class="price">￥{{k.goodsFinalPrice}}</span>
+                      </div>
+                      <p class="spell">去拼团</p>
+                      <!--
+                      <div class="evaluate">
+                        <span class="num">{{k.comments}}条评价</span>
+                        <span>好评{{k.goodCommentsShare}}%</span>
+                      </div>
+                      -->
+                    </div>
+                </router-link>
             </li>
         </ul>
         <button class="button" @click="getMore">{{ pageNo > 10 ? "没有更多数据了" : "加载更多" }}</button>        
@@ -59,7 +63,8 @@ export default {
         return {
             goodsList: [],
             bottomGoodsList: [],
-            pageNo: 1
+            pageNo: 1,
+            substitutePageSize: 0
         };
     },
     components:{
@@ -78,12 +83,14 @@ export default {
         getContent: function () {
             api.get("/fox/app/home/groupBuyingGoods",{
               params:{
-                USER_ID: "EeThqo"
+                USER_ID: "EeThqo",
+                substitutePageSize: this.substitutePageSize
               }
             }).then(
               (response)=>{
                 this.goodsList = response.data.content.groupBuyingTopGoods
                 this.bottomGoodsList = this.bottomGoodsList.concat(response.data.content.groupBuyingBottomGoods)
+                this.substitutePageSize = response.data.content.substitutePageSize
               },
               (error)=>{
                   Toast("加载失败。。。");

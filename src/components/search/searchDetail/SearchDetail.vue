@@ -94,7 +94,7 @@ export default {
               }).then(
               (response)=>{
                 this.goodsLists = this.goodsLists.concat(response.data.content.goodsList);
-                if (this.page_no > 8) {
+                if (response.data.content.goodsList == '') {
                     this.allLoaded = true; // 若数据已全部获取完毕
                 }
                 this.$refs.loadmore.onBottomLoaded();
@@ -116,6 +116,8 @@ export default {
     .main-body {
         overflow: scroll;
         ul {
+            width: 100%;
+            height: 100%;
             li {
                 float: left;
                 width: 49%;

@@ -12,6 +12,7 @@ const Search = resolve => require(['@/components/search/Search.vue'], resolve)
 const SearchDetail = resolve => require(['@/components/search/searchDetail/SearchDetail.vue'], resolve)
 const TaoDetail = resolve => require(['@/components/category/goodsDetail/TaoDetail.vue'], resolve)
 const JingDetail = resolve => require(['@/components/category/goodsDetail/JingDetail.vue'], resolve)
+const SpellDetail = resolve => require(['@/components/index/icons/spellGoods/SpellDetail.vue'], resolve)
 const Economize = resolve => require(['@/components/index/icons/Economize.vue'], resolve)
 const NewPerson = resolve => require(['../components/index/icons/NewPerson.vue'], resolve)
 const Pinkage = resolve => require(['../components/index/icons/Pinkage.vue'], resolve)
@@ -65,6 +66,11 @@ export default new Router({
       path: '/jingDetail',
       name: '京东详情',
       component: JingDetail,
+    },
+    {
+      path: '/spellDetail',
+      name: '拼团详情',
+      component: SpellDetail,
     },
     {
       path: '/economize',

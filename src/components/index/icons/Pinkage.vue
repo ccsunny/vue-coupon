@@ -112,7 +112,7 @@ export default {
             }).then(
               (response)=>{
                 this.bottomGoods =  this.bottomGoods.concat(response.data.content.goodsList);
-                if (this.page > 10) {
+                if (response.data.content.goodsList == '') {
                     this.allLoaded = true; // 若数据已全部获取完毕
                 }
                 this.$refs.loadmore.onBottomLoaded();

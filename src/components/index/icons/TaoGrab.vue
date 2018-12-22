@@ -134,7 +134,7 @@ export default {
           }).then(
             (response)=>{
               this.bottomGoodsList =  this.bottomGoodsList.concat(response.data.content.tpanicBottomBuyGoods);
-              if (this.pageNo > 0) {
+              if (response.data.content.tpanicBottomBuyGoods == '') {
                 this.allLoaded = true; // 若数据已全部获取完毕
                }
                this.$refs.loadmore.onBottomLoaded();
