@@ -79,14 +79,15 @@ li {
   background: #fff;
 }
 .section4 {
+  padding: 0 2vw;
   padding-top: 3vw;
   .stroll {
     width: 100%;
-    height: 6vw;
+    height: 5vw;
     margin-bottom: 3vw;
     img {
       display: block;
-      width: 52%;
+      width: 46%;
       height: 100%;
       margin: 0 auto;
     }
@@ -168,7 +169,7 @@ li {
       height: 100%;
       background: #fff;
       li {
-        width: 33.5vw;
+        width: 32vw;
         height: 100%;
         padding: 2vw;
         box-sizing: border-box;

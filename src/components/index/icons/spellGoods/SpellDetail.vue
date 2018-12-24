@@ -42,7 +42,6 @@ export default {
   },
   mounted() {
     this.getContent();
-    this.getList();
   },
   methods: {
     getContent: function () {

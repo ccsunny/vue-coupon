@@ -6,8 +6,6 @@ import Vuex from 'vuex'
 import login from './modules/login'
 import share from './modules/share'
 import common from './modules/common'
-import tao from './modules/tao'
-import jing from './modules/jing'
 
 
 Vue.use(Vuex)
@@ -17,7 +15,5 @@ export default new Vuex.Store({
     login,
     share,
     common,
-    tao,
-    jing
   }
 })

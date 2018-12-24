@@ -75,11 +75,11 @@ export default {
   padding-top: 3vw;
   .recommend {
     width: 100%;
-    height: 6vw;
+    height: 5vw;
     margin-bottom: 3vw;
     img {
       display: block;
-      width: 52%;
+      width: 46%;
       height: 100%;
       margin: 0 auto;
     }

@@ -5,7 +5,7 @@
                 <li v-for="item in topGoods" ref="goodList">
                     <router-link :to="item.goodsType == 2 ? `/jingDetail?goods_id=${item.goodsId}` : `/taoDetail?NUM_IID=${item.goodsId}`">
                         <img :src="item.goodsImgUrl"/>
-                        <div class="offer">特价</div>
+                        <div class="offer"></div>
                         <div class="rob">已抢{{item.goodsVolume}}件</div>
                         <p>{{ item.goodsName }}</p>
                         <span>￥{{ item.goodsDiscountPrice }}</span>
@@ -87,19 +87,16 @@ export default {
                     position: absolute;
                     top: 0;
                     left: 3vw;
-                    width: 34%;
-                    height: 12vw;
-                    line-height: 11vw;
+                    width: 28%;
+                    height: 10vw;
                     background-image: url(../../../../assets/img/index/icon/pinkage/icon-tj.png);
                     background-size: 100% 100%;
-                    color: #fff;
-                    font-size: 4vw;
                 }
                 .rob {
                     position: absolute;
                     top: 27.5vw;
                     left: 0;
-                    width: 48%;
+                    padding: 0 4%;
                     text-align: center;
                     height: 5vw;
                     line-height: 5vw;

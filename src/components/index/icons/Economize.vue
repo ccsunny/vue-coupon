@@ -12,21 +12,17 @@
         <h1><img src="../../../assets/img/index/icon/sdp/icon-cjdp.png"/></h1>
         <div class="hotGoods" ref="hotGoods">
             <ul class="goodsCon" ref="goodsCon">
-                <li :class="{active:item.id == num}" v-for="item in goodsList" :key="item.id" ref="goodList" @click="tab(item)">{{item.goodsName}}</li>
+                <li :class="{active:index == num}" v-for="(item,index) in goodsList" :key="index" ref="goodList" @click="tab(index)">{{item.goodsName}}</li>
             </ul>
         </div>
-        <mt-swipe :auto="0" :continuous="false" :show-indicators="false" @change="handleChange">
-            <mt-swipe-item :class="{'is-active':k.id == num}" v-for="k in swiper" :key="k.id" >
-                <ul>
-                    <li v-for="m in k.swiperCon">
-                        <router-link :to="`/searchDetail?q=${m.className}`">
-                            <img :src="m.icon"/>
-                            <p>{{m.className}}</p>
-                        </router-link>
-                    </li>
-                </ul>
-            </mt-swipe-item>
-        </mt-swipe>
+        <ul class="goodsIcon" v-for="(k,index) in swiper" :key="index" v-show=" index == num">
+            <li v-for="m in k.swiperCon">
+                <router-link :to="`/searchDetail?q=${m.className}`">
+                    <img :src="m.icon"/>
+                    <p>{{m.className}}</p>
+                </router-link>
+            </li>
+        </ul>
     </div>
 </template>
 <script>
@@ -731,12 +727,9 @@ export default {
                 }
             });
         },
-        tab(item) {
-            this.num = item.id;
+        tab(index) {
+            this.num = index;
         },
-        handleChange(index) {
-            this.num = index
-        }
     }
 }
 </script>
@@ -826,39 +819,35 @@ export default {
             }
         }
     }
-    .mint-swipe {
+    .goodsIcon {
         width: 100%;
         height: 100%;
-        background-color: #fff;
-        ul {
-            width: 100%;
-            height: 100%;
-            li {
-                float: left;
-                width: 25%;
-                height: 16%;
-                text-align: center;
+        background: #fff;
+        li {
+            float: left;
+            width: 25%;
+            height: 16%;
+            text-align: center;
+            border: 1px solid #eee;
+            border-left: 0;
+            padding-top: 4%;
+            box-sizing: border-box;
+            img {
+                width: 68%;
+                height: 66%;
                 border: 1px solid #eee;
-                border-left: 0;
-                padding-top: 4%;
-                box-sizing: border-box;
-                img {
-                    width: 68%;
-                    height: 66%;
-                    border: 1px solid #eee;
-                }
-                p{
-                    height: 20%;
-                    font-size: 3vw;
-                    color: #666;
-                }
             }
-            li:nth-child(4n) {
-                border-right: 0;
+            p{
+                height: 20%;
+                font-size: 3vw;
+                color: #666;
             }
-            li:nth-child(n+5) {
-                border-top: 0;
-            }
+        }
+        li:nth-child(4n) {
+            border-right: 0;
+        }
+        li:nth-child(n+5) {
+            border-top: 0;
         }
     }
 }

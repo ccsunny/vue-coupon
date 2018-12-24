@@ -4,7 +4,7 @@
         <h1 slot="title">商品详情</h1>
     </v-header>
     <v-swiper :swiper="swiper"/>
-    <v-title :taoDetail="taoDetail"/>
+    <v-title :taoDetail="taoDetail" :imgUrl="imgUrl"/>
     <v-like :goodsList="goodsList"/>
     <v-baseline/>
     <v-footer :coupon="coupon"/>
@@ -13,6 +13,7 @@
 
 <script>
 import { Toast } from "mint-ui"
+import axios from 'axios'
 import { mapGetters } from 'vuex'
 import api from '../../../api/api.js'
 import Header from '../../../common/Header'
@@ -27,7 +28,8 @@ export default {
       swiper: [],
       taoDetail: {},
       coupon: {},
-      goodsList: []
+      goodsList: [],
+      imgUrl: []
     };
   },
   components:{
@@ -40,6 +42,7 @@ export default {
   },
   mounted() {
     this.getContent();
+    this.getImgUrl();
   },
   methods: {
     getContent: function () {
@@ -68,6 +71,20 @@ export default {
                 Toast("加载失败。。。");
             }
           )
+        },
+        (error)=>{
+            Toast("加载失败。。。");
+        }
+      );
+    },
+    getImgUrl: function () {
+      api.get("/fox/app/interFaceAppController/goodsImgInfo",{
+        params:{
+          item_id: this.$route.query.NUM_IID
+        },
+      }).then(
+        (res)=>{
+          this.imgUrl = res.data.content.imgurl
         },
         (error)=>{
             Toast("加载失败。。。");

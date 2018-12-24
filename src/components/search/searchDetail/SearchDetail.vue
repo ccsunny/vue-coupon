@@ -4,11 +4,11 @@
             <h1 slot="title">{{this.$route.query.q}}</h1>
         </v-header>
         <div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-10) + 'px' }">
-            <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :autoFill="isAutoFill">
+            <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :autoFill="isAutoFill">
                 <ul>
                     <li v-for="item in goodsLists">
                         <router-link :to="item.goodsType == 2 ? `/jingDetail?goods_id=${item.goodsId}` : `/taoDetail?NUM_IID=${item.goodsId}`">
-                            <img class="main-img" v-lazy="item.goodsImgUrl"/>
+                            <img class="main-img" :src="item.goodsImgUrl"/>
                             <div class="container">
                                 <div class="con-top">
                                     <img :src=" item.goodsType == 0 ? require('../../../assets/img/category/tb.png') : item.goodsType == 1 ? require('../../../assets/img/category/tm.png') : require('../../../assets/img/category/jd.png')"/>
@@ -62,6 +62,10 @@ export default {
       this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
     },
     methods: {
+        loadTop() {
+            this.page_no++;
+            this.getLists();
+        },
         loadBottom() {
             this.page_no++;
             this.loadMore();

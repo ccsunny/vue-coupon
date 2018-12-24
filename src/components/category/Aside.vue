@@ -91,11 +91,11 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/hundred/15.jpg')
             },
             {
-              className:"音像制品",
+              className:"音像",
               icon: require('../../assets/img/category/list/hundred/16.jpg')
             },
             {
-              className:"纸品湿巾",
+              className:"纸巾、湿巾",
               icon: require('../../assets/img/category/list/hundred/17.png')
             }
           ],
