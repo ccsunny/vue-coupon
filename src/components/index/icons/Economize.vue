@@ -833,7 +833,7 @@ export default {
             padding-top: 4%;
             box-sizing: border-box;
             img {
-                width: 68%;
+                width: 66%;
                 height: 66%;
                 border: 1px solid #eee;
             }

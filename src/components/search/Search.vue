@@ -208,6 +208,7 @@ export default {
         border-radius: 2vw;
         margin-right: 4vw;
         font-size: 3vw;
+        margin-bottom: 2vw;
       }
     }
   }

@@ -3,7 +3,7 @@
     <v-header class="header">
         <h1 slot="title">商品详情</h1>
     </v-header>
-    <v-swiper :swiper="swiper"/>
+    <v-swiper :swiper="swiper" :pictUrl="pictUrl"/>
     <v-title :taoDetail="taoDetail" :imgUrl="imgUrl"/>
     <v-like :goodsList="goodsList"/>
     <v-baseline/>
@@ -29,7 +29,8 @@ export default {
       taoDetail: {},
       coupon: {},
       goodsList: [],
-      imgUrl: []
+      imgUrl: [],
+      pictUrl:""
     };
   },
   components:{
@@ -54,6 +55,7 @@ export default {
         }).then(
         (response)=>{
           this.swiper = response.data.content.goodsItem.small_images
+          this.pictUrl = response.data.content.goodsItem.pict_url
           this.taoDetail = response.data.content.goodsItem
           this.coupon = response.data.content.link
           let antistop = response.data.content.goodsItem.cat_leaf_name

@@ -1,7 +1,7 @@
 <template>
   <div class="health">
     <ul>
-      <li v-for="k in lists" :key="k.id">
+      <li v-for="k in lists" :key="k.id" @click="linkUrl(k)">
         <p class="time">{{k.addTime}}</p>
         <div class="content">
           <div class="title">{{k.title}}</div>
@@ -50,6 +50,9 @@ export default {
             Toast("加载失败。。。");
         }
       );
+    },
+    linkUrl(k) {
+      window.location.href = `${this.getShopUrl}/${k.url}`
     }
   }
 }
@@ -64,6 +67,7 @@ export default {
     li {
       padding: 0 2vw;
       .time {
+        font-size: 4.5vw;
         text-align: center;
         line-height: 10vw;
       }
@@ -71,6 +75,7 @@ export default {
         background: #fff;
         padding:4vw;
         .title {
+          font-size: 4.5vw;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -79,13 +84,14 @@ export default {
           display: block;
           width: 100%;
           margin: 0 auto;
-          height: 42vw;
+          height: 50vw;
           margin-top: 2vw;
         }
         .read {
           overflow: hidden;
           margin-top: 2vw;
           span {
+            font-size: 4.5vw;
             float: left;
           }
           img {

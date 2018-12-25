@@ -1,13 +1,12 @@
 <template lang="html">
-
-    <div class="swiper">
-      <mt-swipe :auto="4000">
-        <mt-swipe-item v-for="k in swiper" :key="k.id">
-           <img :src="k">
-        </mt-swipe-item>
-      </mt-swipe>
-    </div>
-
+  <div class="swiper">
+    <img :src="pictUrl" v-show="swiper.length == 0">
+    <mt-swipe :auto="4000" v-show="swiper.length > 0">
+      <mt-swipe-item v-for="k in swiper" :key="k.id">
+        <img :src="k"> 
+      </mt-swipe-item>
+    </mt-swipe>
+  </div>
 </template>
 
 <script>
@@ -21,6 +20,10 @@ export default {
     swiper: {
       type: Array,
       required: true
+    },
+    pictUrl: {
+      type: String,
+      required: true
     }
   }
 }
@@ -30,6 +33,11 @@ export default {
 .swiper {
   width: 100%;
   position: relative;
+  img {
+    display: block;
+    width: 100%;
+    height: 98vw;
+  }
   .mint-swipe {
     width: 100%;
     height: 98vw;

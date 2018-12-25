@@ -27,7 +27,7 @@
         </router-link>
       </li>
     </ul>
-    <button class="button" @click="getMore">{{ pageNo > 10 ? "没有更多数据了" : "加载更多" }}</button>
+    <button class="button" @click="getMore">{{ pageNo > 10 ? "没有更多数据了" : "点击加载更多" }}</button>
   </section>
 </template>
 
@@ -182,7 +182,7 @@ export default {
     height: 10vw;
     font-size: 4vw;
     line-height: 10vw;
-    background: #f0306f;
+    background: #f0303f;
     color: #fff;
   }
 }

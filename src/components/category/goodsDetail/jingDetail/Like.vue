@@ -84,8 +84,8 @@ export default {
           img {
             float: left;
             width: 10%;
-            height: 4vw;
-            margin-top: 0.5vw;
+            height: 3vw;
+            margin-top: 1vw;
           }
           p{
             float: left;
@@ -114,7 +114,7 @@ export default {
             margin-right: 1vw;
           }
           .coupon {
-            float: left;
+            float: right;
             width: 38%;
             height: 8vw;
             line-height: 8vw;
@@ -123,7 +123,7 @@ export default {
             text-align: center;
             background-image: url(../../../../assets/img/category/yhj.png);
             background-size: 100% 100%;
-            margin-left: 10%;
+            margin-right: 8%;
             margin-top: -1vw;
           }
         }

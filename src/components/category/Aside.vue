@@ -401,7 +401,7 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/bag/5.png') 
             },
             {
-              className:"箱包配件",
+              className:"箱、包配件",
               icon: require('../../assets/img/category/list/bag/6.jpg') 
             },
           ],
@@ -727,7 +727,7 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/food/3.png')
             },
             {
-              className:"粮油速食",
+              className:"速食",
               icon: require('../../assets/img/category/list/food/4.png')
             },
             {
@@ -747,11 +747,11 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/food/8.png')
             },
             {
-              className:"中外名酒",
+              className:"名酒",
               icon: require('../../assets/img/category/list/food/9.png')
             },
             {
-              className:"品质肉禽",
+              className:"肉食",
               icon: require('../../assets/img/category/list/food/10.png')
             },
             {
@@ -773,7 +773,7 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/sports/3.png')
             },
             {
-              className:"户外鞋服",
+              className:"户外套装",
               icon: require('../../assets/img/category/list/sports/4.png')
             },
             {
