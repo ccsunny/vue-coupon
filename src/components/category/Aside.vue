@@ -39,10 +39,6 @@ import axios from 'axios'
               icon: require('../../assets/img/category/list/hundred/2.png')
             },
             {
-              className:"成人用品",
-              icon: require('../../assets/img/category/list/hundred/3.png')
-            },
-            {
               className:"家庭清洁",
               icon: require('../../assets/img/category/list/hundred/4.png')
             },
@@ -97,7 +93,11 @@ import axios from 'axios'
             {
               className:"纸巾、湿巾",
               icon: require('../../assets/img/category/list/hundred/17.png')
-            }
+            },
+            {
+              className:"成人用品",
+              icon: require('../../assets/img/category/list/hundred/3.png')
+            },
           ],
           [
             {

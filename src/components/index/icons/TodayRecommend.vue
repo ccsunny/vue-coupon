@@ -3,24 +3,18 @@
         <v-header class="header">
             <h1 slot="title">今日推荐</h1>
         </v-header>
+        <div class="hotGoods" ref="hotGoods">
+            <ul class="goodsCon" ref="goodsCon">
+                <li :class="{active:index == num}" v-for="(item,index) in goodsList" :key="index" @click="tab(index,item)" ref="goodList">{{item}}</li>
+            </ul>
+        </div>
         <div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-10) + 'px' }">
             <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :autoFill="isAutoFill">
                 <div class="r-title">
                     <img src="../../../assets/img/index/icon/recommend/icon-gw.png"/>
                     <span>每日精选超低价</span>
                 </div>
-                <div class="hotGoods" ref="hotGoods">
-                    <ul class="goodsCon" ref="goodsCon">
-                        <li v-for="item in topGoodsList" ref="goodList">
-                            <router-link :to="item.goodsType == 2 ? `/jingDetail?goods_id=${item.goodsId}` : `/taoDetail?NUM_IID=${item.goodsId}`">
-                                <img v-lazy="item.goodsImgUrl"/>
-                                <p>{{ item.goodsName }}</p>
-                                <del>￥{{ item.goodsPrice }}</del>
-                                <span>￥{{ item.goodsDiscountPrice }}</span>
-                            </router-link>
-                        </li>
-                    </ul>
-                </div>
+                <v-deserve :topGoodsList="topGoodsList" />
                 <img class="banner" src="../../../assets/img/index/icon/recommend/banner.png"/>
                 <div class="r-title">
                     <img src="../../../assets/img/index/icon/recommend/icon-jinrmbl.png"/>
@@ -29,7 +23,7 @@
                 <ul class="goodsCon">
                     <li v-for="k in bottomGoodsList">
                         <router-link :to="k.goodsType == 2 ? `/jingDetail?goods_id=${k.goodsId}` : `/taoDetail?NUM_IID=${k.goodsId}`">
-                            <img v-lazy="k.goodsImgUrl">
+                            <img :src="k.goodsImgUrl">
                             <div class="container">
                               <div class="top">
                                 <img :src=" k.goodsType == 0 ? require('../../../assets/img/category/tb.png') : k.goodsType == 1 ? require('../../../assets/img/category/tm.png') : require('../../../assets/img/category/jd.png')"/>
@@ -61,9 +55,12 @@ import { Toast } from "mint-ui"
 import api from '../../../api/api'
 import BScroll from "better-scroll"
 import Header from '../../../common/Header'
+import Deserve from './todayRecommend/deserve'
 export default {
     data () {
         return {
+            goodsList:["居家","女装","男装","母婴","家电","箱包","美妆","洗护","内衣","数码","女鞋","男鞋","食品"],
+            num: 0,
             topGoodsList: [],
             bottomGoodsList: [],
             //可以进行上拉
@@ -72,40 +69,39 @@ export default {
             isAutoFill: false,
             wrapperHeight: 0,
             pageNo: 1,
-            q: 1
+            q: "居家"
         };
     },
     components:{
         'v-header': Header,
+        'v-deserve': Deserve,
     },
     created() {
-        this.getContent();
-        let that = this;
-        setTimeout(function(){
-            that.InitGoodsListScroll();
-        }, 1000);
+        this.tab(0,this.q);
     },
     mounted() {
+        this.InitGoodsListScroll();
         // 父控件要加上高度，否则会出现上拉不动的情况
         this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
     },
     methods: {
         loadBottom() {
             this.pageNo++;
-            this.q++;
             this.loadMore();
         },
-        getContent: function () {
+        tab(index,item) {
+            this.num = index;
+            this.q = item;
             api.get("/fox/app/home/todayRecommendGoods",{
               params:{
                 USER_ID: "EeThqo",
+                pageNo: this.pageNo,
+                q: item
               }
             }).then(
               (response)=>{
-                this.allLoaded = false; // 可以进行上拉
                 this.topGoodsList = response.data.content.todayRefinedTopGoods;
                 this.bottomGoodsList = response.data.content.todayRecommendBottomGoods;
-                this.$refs.loadmore.onTopLoaded();
               },
               (error)=>{
                   Toast("加载失败。。。");
@@ -133,8 +129,8 @@ export default {
             );
         },
         InitGoodsListScroll(){
-            let width= 100
-            for (let i = 0; i <this.topGoodsList.length; i++) {
+            let width=16
+            for (let i = 0; i <this.goodsList.length; i++) {
                  width+=this.$refs.goodList[0].getBoundingClientRect().width; //getBoundingClientRect() 返回元素的大小及其相对于视口的位置
             }
             this.$refs.goodsCon.style.width=width+'px'
@@ -160,6 +156,31 @@ export default {
     width: 100%;
     height: 100%;
     padding-top: 12vw;
+    .hotGoods {
+        width: 100%;
+        height: 10vw;
+        background: #fff;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        &::-webkit-scrollbar {display:none}
+        touch-action: none;
+        .goodsCon {
+            height: 100%;
+            padding: 0 2vw;
+            li {
+                display: inline-block;
+                width: 20vw;
+                text-align: center;
+                font-size: 4vw;
+                color: #333;
+                line-height: 10vw;
+            }
+            .active {
+                color: #ff3333;
+                // border-bottom: 1px solid #ff3333;
+            }
+        }
+    }
     .main-body {
         overflow: scroll;
         .r-title {
@@ -175,52 +196,6 @@ export default {
             span {
                 font-size: 3vw;
                 color: #666;
-            }
-        }
-        .hotGoods {
-            width: 100%;
-            height: 52vw;
-            background: #fff;
-            overflow: hidden;
-            .goodsCon {
-                height: 100%;
-                background: #fff;
-                padding: 0 2vw;
-                li {
-                    display: inline-block;
-                    width: 30vw;
-                    height: 50vw;
-                    margin-right: 2vw;
-                    img {
-                        width: 100%;
-                        height: 28vw;
-                    }
-                    p {
-                        font-size: 4vw;
-                        color: #333;
-                        width: 90%;
-                        margin: 0 auto;
-                        margin-top: 2vw;
-                        overflow: hidden;
-                        text-overflow:ellipsis;
-                        white-space: nowrap;
-                    }
-                    del {
-                        display: block;
-                        font-size: 3vw;
-                        color: #999;
-                        text-align: center;
-                        margin-top: 1vw;
-                    }
-                    span {
-                        display: block;
-                        font-size: 4vw;
-                        font-weight: 600;
-                        color: #ff3333;
-                        text-align: center;
-                        margin-top: 1vw;
-                    }
-                }
             }
         }
         .banner {

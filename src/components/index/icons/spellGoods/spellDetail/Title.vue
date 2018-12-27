@@ -18,7 +18,10 @@
         <img :src="show == true ? require('../../../../../assets/img/category/up.png') : require('../../../../../assets/img/category/down.png')"/>
       </div>
       <ul class="imgDetail" v-if="show">
-        <li v-for="item in taoDetail.goodsInFoImg">
+        <li v-for="item in imgUrl" v-show="!imgUrl == ''">
+          <img :src="item"/>
+        </li>
+        <li class="placeImg" v-for="item in taoDetail.goodsInFoImg" v-show="imgUrl == ''">
           <img :src="item"/>
         </li>
       </ul>
@@ -40,6 +43,10 @@ export default {
     },
     spellPrice: {
       type: String,
+      required: true
+    },
+    imgUrl: {
+      type: Array,
       required: true
     }
   },
@@ -134,13 +141,17 @@ export default {
       width: 100%;
       height: auto;
       li {
-        width: 100%;
-        height: 102vw;
+        // width: 100%;
+        // height: 102vw;
         img {
           width: 100%;
           height: 100%;
           vertical-align: middle;
         }
+      }
+      .placeImg {
+        width: 100%;
+        height: 102vw;
       }
     }
   }

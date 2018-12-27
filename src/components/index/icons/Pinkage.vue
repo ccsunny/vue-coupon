@@ -53,7 +53,7 @@ import LowPrice from './pinkage/LowPrice'
 export default {
     data () {
         return {
-            goodsList:["居家","女装","男装","母婴","数码","食品","美妆"],
+            goodsList:["居家","女装","男装","母婴","家电","箱包","美妆","洗护","内衣","数码","女鞋","男鞋","食品"],
             num: 0,
             topGoods: [],
             bottomGoods:[],

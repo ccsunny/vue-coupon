@@ -80,7 +80,7 @@ export default {
         margin-left: 2%;
         .r-top {
           width: 100%;
-          height: 8vw;
+          height: 6vw;
           margin-top: 2vw;
           img {
             float: left;
@@ -108,6 +108,7 @@ export default {
           font-size: 3vw;
           padding-left: 8vw;
           color: #999;
+          margin-top: 2vw;
         }
         .r-bottom {
           margin-top: 2vw;

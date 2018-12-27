@@ -4,7 +4,7 @@
         <h1 slot="title">商品详情</h1>
     </v-header>
     <v-swiper :swiper="swiper"/>
-    <v-title :taoDetail="taoDetail" :spellPrice="spellPrice"/>
+    <v-title :taoDetail="taoDetail" :spellPrice="spellPrice" :imgUrl="imgUrl"/>
     <v-like :goodsList="goodsList"/>
     <v-baseline/>
     <v-footer :coupon="coupon" :taoDetail="taoDetail" :spellPrice="spellPrice" :spellLink="spellLink"/>
@@ -30,6 +30,7 @@ export default {
       goodsList: [],
       spellPrice: "",
       spellLink: "",
+      imgUrl: []
     };
   },
   components:{
@@ -42,6 +43,7 @@ export default {
   },
   mounted() {
     this.getContent();
+    this.getImgUrl();
   },
   methods: {
     getContent: function () {
@@ -72,6 +74,20 @@ export default {
                 Toast("加载失败。。。");
             }
           )
+        },
+        (error)=>{
+            Toast("加载失败。。。");
+        }
+      );
+    },
+    getImgUrl: function () {
+      api.get("/fox/app/interFaceAppController/goodsImgInfo",{
+        params:{
+          item_id: this.$route.query.NUM_IID
+        },
+      }).then(
+        (res)=>{
+          this.imgUrl = res.data.content.imgurl
         },
         (error)=>{
             Toast("加载失败。。。");

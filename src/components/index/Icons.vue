@@ -69,7 +69,7 @@ export default {
     padding: 0 4vw;
     padding-top: 8vw;
     position: absolute;
-    top: 42vw;
+    top: 44vw;
     left: 0;
     box-sizing: border-box;
     ul {

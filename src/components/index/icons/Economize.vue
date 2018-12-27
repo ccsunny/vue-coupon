@@ -170,15 +170,11 @@ export default {
                     id: 1,
                     swiperCon: [
                         {
-                            className:"Dettol滴露",
+                            className:"滴露",
                             icon: require('../../../assets/img/index/icon/sdp/home/1.jpg')
                         },
                         {
-                            className:"tenma家居",
-                            icon: require('../../../assets/img/index/icon/sdp/home/2.jpg')
-                        },
-                        {
-                            className:"tiger虎牌",
+                            className:"虎牌",
                             icon: require('../../../assets/img/index/icon/sdp/home/3.jpg')
                         },
                         {
@@ -186,7 +182,7 @@ export default {
                             icon: require('../../../assets/img/index/icon/sdp/home/4.jpg')
                         },
                         {
-                            className:"zojirushi象印",
+                            className:"象印",
                             icon: require('../../../assets/img/index/icon/sdp/home/5.jpg')
                         },
                         {
@@ -344,16 +340,12 @@ export default {
                             icon: require('../../../assets/img/index/icon/sdp/girl/3.png')
                         },
                         {
-                            className:"gainreel歌瑞尔",
+                            className:"歌瑞尔",
                             icon: require('../../../assets/img/index/icon/sdp/girl/4.jpg')
                         },
                         {
                             className:"JNBY",
                             icon: require('../../../assets/img/index/icon/sdp/girl/5.jpg')
-                        },
-                        {
-                            className:"olrain",
-                            icon: require('../../../assets/img/index/icon/sdp/girl/6.jpg')
                         },
                         {
                             className:"osa",
@@ -380,20 +372,12 @@ export default {
                             icon: require('../../../assets/img/index/icon/sdp/girl/12.jpg')
                         },
                         {
-                            className:"例外部落",
-                            icon: require('../../../assets/img/index/icon/sdp/girl/13.png')
-                        },
-                        {
                             className:"骆驼服饰",
                             icon: require('../../../assets/img/index/icon/sdp/girl/14.png')
                         },
                         {
                             className:"骆驼女鞋",
                             icon: require('../../../assets/img/index/icon/sdp/girl/15.png')
-                        },
-                        {
-                            className:"纤麦服饰",
-                            icon: require('../../../assets/img/index/icon/sdp/girl/16.jpg')
                         },
                         {
                             className:"茵曼",
@@ -413,7 +397,7 @@ export default {
                             icon: require('../../../assets/img/index/icon/sdp/beauty/1.png')
                         },
                         {
-                            className:"Guerlain娇兰",
+                            className:"娇兰",
                             icon: require('../../../assets/img/index/icon/sdp/beauty/2.jpg')
                         },
                         {
@@ -421,19 +405,19 @@ export default {
                             icon: require('../../../assets/img/index/icon/sdp/beauty/3.jpg')
                         },
                         {
-                            className:"KIEHL'S科颜氏",
+                            className:"科颜氏",
                             icon: require('../../../assets/img/index/icon/sdp/beauty/4.jpg')
                         },
                         {
-                            className:"L’OCCITANE欧舒丹",
+                            className:"欧舒丹",
                             icon: require('../../../assets/img/index/icon/sdp/beauty/5.jpg')
                         },
                         {
-                            className:"Lancome兰蔻",
+                            className:"兰蔻",
                             icon: require('../../../assets/img/index/icon/sdp/beauty/6.jpg')
                         },
                         {
-                            className:"SHISEIDO资生堂",
+                            className:"资生堂",
                             icon: require('../../../assets/img/index/icon/sdp/beauty/7.jpg')
                         },
                         {
@@ -554,10 +538,6 @@ export default {
                             icon: require('../../../assets/img/index/icon/sdp/mom/15.jpg')
                         },
                         {
-                            className:"米诺奇",
-                            icon: require('../../../assets/img/index/icon/sdp/mom/16.png')
-                        },
-                        {
                             className:"强生",
                             icon: require('../../../assets/img/index/icon/sdp/mom/17.jpg')
                         },
@@ -623,10 +603,6 @@ export default {
                             icon: require('../../../assets/img/index/icon/sdp/code/12.jpg')
                         },
                         {
-                            className:"罗马仕良米",
-                            icon: require('../../../assets/img/index/icon/sdp/code/13.jpg')
-                        },
-                        {
                             className:"美图",
                             icon: require('../../../assets/img/index/icon/sdp/code/14.jpg')
                         },
@@ -638,19 +614,11 @@ export default {
                             className:"唐麦",
                             icon: require('../../../assets/img/index/icon/sdp/code/16.png')
                         },
-                        {
-                            className:"中山品能",
-                            icon: require('../../../assets/img/index/icon/sdp/code/17.jpg')
-                        },
                     ]
                 },
                 {
                     id: 7,
                     swiperCon: [
-                        {
-                            className:"logo-qjdyf",
-                            icon: require('../../../assets/img/index/icon/sdp/food/1.jpg')
-                        },
                         {
                             className:"百草味",
                             icon: require('../../../assets/img/index/icon/sdp/food/2.jpg')

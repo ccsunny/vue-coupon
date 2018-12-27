@@ -18,10 +18,11 @@ const actions = {
     set_share_goods_list({commit}) {
         vm.$api({
             method:'post',
-            url:"/fox/app/sharePyqController/sharePyqGoods",
+            url:"/fox/app/sharePyqController/sharePyqGoodsByPage",
             params: {
                 shareClassId:"587ab8f35d3e4ae796158e63bdec3dc4",
-                pageNo: "1"
+                pageNo: "1",
+                USER_ID:"EeThqo"
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
