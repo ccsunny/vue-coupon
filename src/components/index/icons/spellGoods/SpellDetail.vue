@@ -49,7 +49,7 @@ export default {
     getContent: function () {
       api.get("/fox/app/interFaceAppController/getLinkForTKLNew",{
         params:{
-          USER_ID: "EeThqo",
+          USER_ID: "666666",
           item_id: this.$route.query.NUM_IID
         }
         }).then(
@@ -64,7 +64,7 @@ export default {
             params:{
               pageNo: 1,
               q: antistop,
-              USER_ID: "EeThqo"
+              USER_ID: "666666"
               }
             }).then(
             (res)=>{

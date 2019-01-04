@@ -85,7 +85,7 @@ export default {
       .coupon-init {
         float: left;
         margin-top: 3vw;
-        width: 24vw;
+        width: 28vw;
         text-align: center;
         height: 10vw;
         line-height: 10vw;
@@ -93,7 +93,7 @@ export default {
         background-image: url(../../../../assets/img/category/yhj.png);
         background-size: 100% 100%;
         color: #fff;
-        margin-left: 16vw;
+        margin-left: 12vw;
       }
     }
     .middle {

@@ -49,7 +49,7 @@ export default {
     getList: function () {
       api.get("/fox/app/home/findGoods",{
         params:{
-          USER_ID: "EeThqo",
+          USER_ID: "666666",
           pageNo: this.pageNo
         }
       }).then(

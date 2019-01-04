@@ -82,7 +82,7 @@ export default {
         this.q = item;
         api.get("/fox/app/tb/tbkGetItems",{
             params:{
-              USER_ID: "EeThqo",
+              USER_ID: "666666",
               page_no: this.page_no,
               q: item
             }
@@ -98,7 +98,7 @@ export default {
       loadMore: function () {
           api.get("/fox/app/tb/tbkGetItems",{
             params:{
-              USER_ID: "EeThqo",
+              USER_ID: "666666",
               page_no: this.page_no,
               q: this.q
             }

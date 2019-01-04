@@ -3,9 +3,11 @@
     <img class="banner" src="../assets/img/user/background.png"/>
     <div class="container">
       <div class="header-icon">
-        <img src="../assets/img/tabbar/user.png"/>
+        <img v-show=" userImg == ''" src="../assets/img/tabbar/user.png"/>
+        <img v-show=" !userImg == ''" :src="userImg"/>
       </div>
-      <p class="userName">嘻嘻哈哈</p>
+      <p class="userName" @click="login" v-show=" userName == ''">点击登录</p>
+      <p class="userName" v-show=" !userName == ''">{{userName}}</p>
       <div class="detail">
         <p>省一波给您带来不一样的省钱攻略,</p>
         <p>玩转自购省钱、分享赚钱等省钱方式,</p>
@@ -22,14 +24,25 @@
 </template>
 
 <script>
+import { Toast } from "mint-ui"
 import Tabbar from '@/common/Tabbar.vue'
+import { mapGetters } from 'vuex'
+import api from '../api/api'
 export default {
   components: {
     'mt-tabbar': Tabbar
   },
   data () {
     return {
+      userName:"",
+      userImg: ""
     };
+  },
+  computed: {
+    // mix the getters into computed with object spread operator
+    ...mapGetters([
+      'getShopUrl',
+    ])
   },
   methods: {
     download: function() {
@@ -39,7 +52,23 @@ export default {
       } else {
           window.location.href="http://sj.qq.com/myapp/detail.htm?apkName=com.qianlihu.hs";
       }
-    }
+    },
+    login: function() {
+      // window.location.href=`${this.getShopUrl}/app/weixin/web/application/shareAppv1.htm`
+      api.get(`${this.getShopUrl}/app/weixin/web/application/shareAppv1.htm`).then(
+        (response)=>{
+          this.userName = response.data.userName
+          this.userImg = response.data.userImg
+        },
+        (error)=>{
+            Toast("加载失败。。。");
+        }
+      );
+      // this.userName =  decodeURI(this.$route.query.username)
+      // this.userImg = decodeURI(this.$route.query.userimg)
+      // alert(this.userName)
+      // alert(this.userImg)
+    },
   }
 }
 </script>
