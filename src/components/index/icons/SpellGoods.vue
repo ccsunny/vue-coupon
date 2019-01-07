@@ -83,7 +83,7 @@ export default {
         getContent: function () {
             api.get("/fox/app/home/groupBuyingGoods",{
               params:{
-                USER_ID: "666666",
+                USER_ID: "EeThqo",
                 substitutePageSize: this.substitutePageSize
               }
             }).then(

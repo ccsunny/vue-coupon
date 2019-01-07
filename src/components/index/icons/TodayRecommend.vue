@@ -94,7 +94,7 @@ export default {
             this.q = item;
             api.get("/fox/app/home/todayRecommendGoods",{
               params:{
-                USER_ID: "666666",
+                USER_ID: "EeThqo",
                 pageNo: this.pageNo,
                 q: item
               }
@@ -111,7 +111,7 @@ export default {
         loadMore: function () {
             api.get("/fox/app/home/todayRecommendGoods",{
               params:{
-                USER_ID: "666666",
+                USER_ID: "EeThqo",
                 pageNo: this.pageNo,
                 q: this.q
               }

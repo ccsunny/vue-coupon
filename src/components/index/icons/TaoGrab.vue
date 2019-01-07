@@ -109,7 +109,7 @@ export default {
         getContent: function () {
           api.get("/fox/app/home/tPanicBuyGoods",{
             params:{
-              USER_ID: "666666",
+              USER_ID: "EeThqo",
               pageNo: this.pageNo,
               pageSize: this.pageSize
             }
@@ -127,7 +127,7 @@ export default {
         loadMore: function () {
           api.get("/fox/app/home/tPanicBuyGoods",{
             params:{
-              USER_ID: "666666",
+              USER_ID: "EeThqo",
               pageNo: this.pageNo,
               pageSize: this.pageSize
             }

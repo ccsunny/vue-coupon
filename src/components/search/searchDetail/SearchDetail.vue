@@ -73,7 +73,7 @@ export default {
         getLists: function () {
             api.get("/fox/app/search/fullweb/goodsList",{
               params:{
-                USER_ID: '666666',
+                USER_ID: 'EeThqo',
                 q: this.$route.query.q,
                 page_no: this.page_no
               }
@@ -91,7 +91,7 @@ export default {
         loadMore: function () {
             api.get("/fox/app/search/fullweb/goodsList",{
               params:{
-                USER_ID: '666666',
+                USER_ID: 'EeThqo',
                 q: this.$route.query.q,
                 page_no: this.page_no
               }

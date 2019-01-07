@@ -3,7 +3,7 @@
     <img class="banner" src="../assets/img/user/background.png"/>
     <div class="container">
       <div class="header-icon">
-        <img v-show=" userImg == ''" src="../assets/img/tabbar/user.png"/>
+        <img v-show=" userImg == ''" src="../assets/img/share/logo.png"/>
         <img v-show=" !userImg == ''" :src="userImg"/>
       </div>
       <p class="userName" @click="login" v-show=" userName == ''">点击登录</p>
@@ -90,17 +90,12 @@ export default {
     bottom: 10%;
     width: 100%;
     .header-icon {
-        background-color: #333;
-        width: 16vw;
-        height: 15vw;
-        margin: 0 auto;
-        text-align: center;
-        line-height: 15vw;
-        border-radius: 50%;
-        box-sizing: border-box;
         img{
-          width: 10vw;
-          height: 10vw;
+          display: block;
+          width: 14vw;
+          height: 14vw;
+          margin: 0 auto;
+          border-radius: 50%;
         }
     }
     .userName {

@@ -46,7 +46,7 @@ export default {
       api.get("/fox/app/jdzsController/getJdGoodsDetail",{
         params:{
           gid: this.$route.query.goods_id,
-          USER_ID: "666666"
+          USER_ID: "EeThqo"
           }
         }).then(
         (response)=>{
@@ -65,7 +65,7 @@ export default {
                 params:{
                   coupon_url: discount_link,
                   gid: this.$route.query.goods_id,
-                  USER_ID: "666666",
+                  USER_ID: "EeThqo",
                 }
               }).then(
                 (response)=>{

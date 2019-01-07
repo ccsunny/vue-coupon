@@ -62,7 +62,7 @@ export default {
     getContent: function () {
       api.get("/fox/app/acti/towTwelveAndEverybodyBuyItems",{
         params:{
-          USER_ID: "666666"
+          USER_ID: "EeThqo"
         }
       }).then(
         (response)=>{

@@ -37,7 +37,7 @@ import Clipboard from 'clipboard'
 export default {
     data () {
         return {
-            defaultImg: 'this.src="' + require('../../assets/img/share/logo1.png') + '"',
+            defaultImg: 'this.src="' + require('../../assets/img/share/logo.png') + '"',
         };
     },
     
@@ -51,7 +51,7 @@ export default {
     },
     methods: {
         imgError(item) {
-            item.img = require('../../assets/img/share/logo1.png');
+            item.img = require('../../assets/img/share/logo.png');
         },
         copy: function () {
             let clipboard = new Clipboard('.fx')

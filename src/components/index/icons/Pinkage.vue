@@ -88,7 +88,7 @@ export default {
             this.q = item;
             api.get("/fox/app/tb/freeShipping",{
                 params:{
-                  USER_ID: "666666",
+                  USER_ID: "EeThqo",
                   page: this.page,
                   q: item
                 }
@@ -105,7 +105,7 @@ export default {
         loadMore: function () {
             api.get("/fox/app/tb/freeShipping",{
               params:{
-                USER_ID: "666666",
+                USER_ID: "EeThqo",
                 page: this.page,
                 q:this.q
               }
