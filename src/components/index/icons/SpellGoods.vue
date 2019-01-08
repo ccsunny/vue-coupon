@@ -83,7 +83,7 @@ export default {
         getContent: function () {
             api.get("/fox/app/home/groupBuyingGoods",{
               params:{
-                USER_ID: "EeThqo",
+                USER_ID: "666666",
                 substitutePageSize: this.substitutePageSize
               }
             }).then(
@@ -93,7 +93,7 @@ export default {
                 this.substitutePageSize = response.data.content.substitutePageSize
               },
               (error)=>{
-                  Toast("加载失败。。。");
+                  Toast("抱歉，加载失败了。。。");
               }
             );
         },

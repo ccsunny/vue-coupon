@@ -22,7 +22,7 @@ const actions = {
             params: {
                 shareClassId:"587ab8f35d3e4ae796158e63bdec3dc4",
                 pageNo: "1",
-                USER_ID:"EeThqo"
+                USER_ID:"666666"
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

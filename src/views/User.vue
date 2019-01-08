@@ -61,7 +61,7 @@ export default {
           this.userImg = response.data.userImg
         },
         (error)=>{
-            Toast("加载失败。。。");
+            Toast("抱歉，加载失败了。。。");
         }
       );
       // this.userName =  decodeURI(this.$route.query.username)

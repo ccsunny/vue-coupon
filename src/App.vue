@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <lg-preview></lg-preview>
     <div class="btn" ref="btn" @click="goTop"><img src="./assets/img/common/top.png"/></div>
     <v-loading v-show="fetchLoading"></v-loading>
   </div>

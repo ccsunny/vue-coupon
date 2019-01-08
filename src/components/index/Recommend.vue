@@ -49,7 +49,7 @@ export default {
     getList: function () {
       api.get("/fox/app/home/findGoods",{
         params:{
-          USER_ID: "EeThqo",
+          USER_ID: "666666",
           pageNo: this.pageNo
         }
       }).then(
@@ -57,7 +57,7 @@ export default {
           this.list = this.list.concat(response.data.content.findGoods);
         },
         (error)=>{
-            Toast("加载失败。。。");
+            Toast("抱歉，加载失败了。。。");
         }
       );
     },

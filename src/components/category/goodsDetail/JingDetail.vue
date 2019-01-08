@@ -46,7 +46,7 @@ export default {
       api.get("/fox/app/jdzsController/getJdGoodsDetail",{
         params:{
           gid: this.$route.query.goods_id,
-          USER_ID: "EeThqo"
+          USER_ID: "666666"
           }
         }).then(
         (response)=>{
@@ -65,24 +65,24 @@ export default {
                 params:{
                   coupon_url: discount_link,
                   gid: this.$route.query.goods_id,
-                  USER_ID: "EeThqo",
+                  USER_ID: "666666",
                 }
               }).then(
                 (response)=>{
                   this.coupon = response.data.content
                 },
                 (error)=>{
-                    Toast("加载失败。。。");
+                    Toast("抱歉，加载失败了。。。");
                 }
               );
             },
             (error)=>{
-                Toast("加载失败。。。");
+                Toast("抱歉，加载失败了。。。");
             }
           )
         },
         (error)=>{
-            Toast("加载失败。。。");
+            Toast("抱歉，加载失败了。。。");
         }
       );
     }

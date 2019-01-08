@@ -62,7 +62,7 @@ export default {
     getContent: function () {
       api.get("/fox/app/acti/towTwelveAndEverybodyBuyItems",{
         params:{
-          USER_ID: "EeThqo"
+          USER_ID: "666666"
         }
       }).then(
         (response)=>{
@@ -70,7 +70,7 @@ export default {
           this.everydayList = response.data.content
         },
         (error)=>{
-            Toast("加载失败。。。");
+            Toast("抱歉，加载失败了。。。");
         }
       );
     },

@@ -88,7 +88,7 @@ export default {
             this.q = item;
             api.get("/fox/app/tb/freeShipping",{
                 params:{
-                  USER_ID: "EeThqo",
+                  USER_ID: "666666",
                   page: this.page,
                   q: item
                 }
@@ -98,14 +98,14 @@ export default {
                     this.bottomGoods = response.data.content.goodsList;
                 },
                 (error)=>{
-                    Toast("加载失败。。。");
+                    Toast("抱歉，加载失败了。。。");
                 }
             );
         },
         loadMore: function () {
             api.get("/fox/app/tb/freeShipping",{
               params:{
-                USER_ID: "EeThqo",
+                USER_ID: "666666",
                 page: this.page,
                 q:this.q
               }
@@ -118,7 +118,7 @@ export default {
                 this.$refs.loadmore.onBottomLoaded();
               },
               (error)=>{
-                  Toast("加载失败。。。");
+                  Toast("抱歉，加载失败了。。。");
               }
             );
         },

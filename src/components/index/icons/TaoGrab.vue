@@ -109,7 +109,7 @@ export default {
         getContent: function () {
           api.get("/fox/app/home/tPanicBuyGoods",{
             params:{
-              USER_ID: "EeThqo",
+              USER_ID: "666666",
               pageNo: this.pageNo,
               pageSize: this.pageSize
             }
@@ -120,14 +120,14 @@ export default {
               this.bottomGoodsList = response.data.content.tpanicBottomBuyGoods
             },
             (error)=>{
-                Toast("加载失败。。。");
+                Toast("抱歉，加载失败了。。。");
             }
           );
         },
         loadMore: function () {
           api.get("/fox/app/home/tPanicBuyGoods",{
             params:{
-              USER_ID: "EeThqo",
+              USER_ID: "666666",
               pageNo: this.pageNo,
               pageSize: this.pageSize
             }
@@ -140,7 +140,7 @@ export default {
                this.$refs.loadmore.onBottomLoaded();
             },
             (error)=>{
-                Toast("加载失败。。。");
+                Toast("抱歉，加载失败了。。。");
             }
           );
         },

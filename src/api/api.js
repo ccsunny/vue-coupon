@@ -3,9 +3,11 @@ import store from '@/vuex/store.js'
 import router from '../router'
 
 const api = axios.create();
-// 测试环境
-api.defaults.baseURL = 'http://47.106.88.54:8080'
-store.dispatch('set_shop_url','http://test.syb111.com')
+
+//正式接口
+api.defaults.baseURL = 'http://101.37.19.123:8080'
+store.dispatch('set_shop_url','http://www.syb111.com')
+
 
 api.defaults.timeout = 5000;
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';

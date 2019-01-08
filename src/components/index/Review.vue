@@ -59,7 +59,7 @@ export default {
               this.marqueeList = response.data.content.articleList
             },
             (error)=>{
-                Toast("加载失败。。。");
+                Toast("抱歉，加载失败了。。。");
             }
           );
         },

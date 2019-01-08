@@ -73,7 +73,7 @@ export default {
         getLists: function () {
             api.get("/fox/app/search/fullweb/goodsList",{
               params:{
-                USER_ID: 'EeThqo',
+                USER_ID: '666666',
                 q: this.$route.query.q,
                 page_no: this.page_no
               }
@@ -84,14 +84,14 @@ export default {
                 this.$refs.loadmore.onTopLoaded();
               },
               (error)=>{
-                  Toast("加载失败。。。");
+                  Toast("抱歉，加载失败了。。。");
               }
             );
         },
         loadMore: function () {
             api.get("/fox/app/search/fullweb/goodsList",{
               params:{
-                USER_ID: 'EeThqo',
+                USER_ID: '666666',
                 q: this.$route.query.q,
                 page_no: this.page_no
               }
@@ -104,7 +104,7 @@ export default {
                 this.$refs.loadmore.onBottomLoaded();
               },
               (error)=>{
-                  Toast("加载失败。。。");
+                  Toast("抱歉，加载失败了。。。");
               }
             );
         },

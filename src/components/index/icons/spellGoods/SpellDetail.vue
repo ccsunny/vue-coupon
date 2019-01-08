@@ -49,7 +49,7 @@ export default {
     getContent: function () {
       api.get("/fox/app/interFaceAppController/getLinkForTKLNew",{
         params:{
-          USER_ID: "EeThqo",
+          USER_ID: "666666",
           item_id: this.$route.query.NUM_IID
         }
         }).then(
@@ -64,19 +64,19 @@ export default {
             params:{
               pageNo: 1,
               q: antistop,
-              USER_ID: "EeThqo"
+              USER_ID: "666666"
               }
             }).then(
             (res)=>{
               this.goodsList = res.data.content.goodsList
             },
             (error)=>{
-                Toast("加载失败。。。");
+                Toast("抱歉，加载失败了。。。");
             }
           )
         },
         (error)=>{
-            Toast("加载失败。。。");
+            Toast("抱歉，加载失败了。。。");
         }
       );
     },
@@ -90,7 +90,7 @@ export default {
           this.imgUrl = res.data.content.imgurl
         },
         (error)=>{
-            Toast("加载失败。。。");
+            Toast("抱歉，加载失败了。。。");
         }
       );
     },

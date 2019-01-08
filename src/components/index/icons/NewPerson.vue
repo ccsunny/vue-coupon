@@ -82,7 +82,7 @@ export default {
         this.q = item;
         api.get("/fox/app/tb/tbkGetItems",{
             params:{
-              USER_ID: "EeThqo",
+              USER_ID: "666666",
               page_no: this.page_no,
               q: item
             }
@@ -91,14 +91,14 @@ export default {
               this.goodLists = response.data.content.goodsList;
             },
             (error)=>{
-                Toast("加载失败。。。");
+                Toast("抱歉，加载失败了。。。");
             }
           );
       },
       loadMore: function () {
           api.get("/fox/app/tb/tbkGetItems",{
             params:{
-              USER_ID: "EeThqo",
+              USER_ID: "666666",
               page_no: this.page_no,
               q: this.q
             }
@@ -111,7 +111,7 @@ export default {
               this.$refs.loadmore.onBottomLoaded();
             },
             (error)=>{
-                Toast("加载失败。。。");
+                Toast("抱歉，加载失败了。。。");
             }
           );
       },

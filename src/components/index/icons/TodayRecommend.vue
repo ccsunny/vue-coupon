@@ -94,7 +94,7 @@ export default {
             this.q = item;
             api.get("/fox/app/home/todayRecommendGoods",{
               params:{
-                USER_ID: "EeThqo",
+                USER_ID: "666666",
                 pageNo: this.pageNo,
                 q: item
               }
@@ -104,14 +104,14 @@ export default {
                 this.bottomGoodsList = response.data.content.todayRecommendBottomGoods;
               },
               (error)=>{
-                  Toast("加载失败。。。");
+                  Toast("抱歉，加载失败了。。。");
               }
             );
         },
         loadMore: function () {
             api.get("/fox/app/home/todayRecommendGoods",{
               params:{
-                USER_ID: "EeThqo",
+                USER_ID: "666666",
                 pageNo: this.pageNo,
                 q: this.q
               }
@@ -124,7 +124,7 @@ export default {
                 this.$refs.loadmore.onBottomLoaded();
               },
               (error)=>{
-                  Toast("加载失败。。。");
+                  Toast("抱歉，加载失败了。。。");
               }
             );
         },

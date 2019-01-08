@@ -34,7 +34,7 @@ export default {
           this.swiperList = response.data.content.banners
         },
         (error)=>{
-          Toast("加载失败。。。");
+          Toast("抱歉，加载失败了。。。");
         }
       );
     },

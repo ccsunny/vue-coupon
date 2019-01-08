@@ -80,7 +80,7 @@ export default {
         margin-left: 2%;
         .r-top {
           width: 100%;
-          height: 8vw;
+          height: 6vw;
           margin-top: 2vw;
           img {
             float: left;
@@ -108,6 +108,7 @@ export default {
           font-size: 3vw;
           padding-left: 8vw;
           color: #999;
+          margin-top: 2vw;
         }
         .r-bottom {
           margin-top: 2vw;
@@ -119,7 +120,7 @@ export default {
             margin-right: 1vw;
           }
           .coupon {
-            float: left;
+            float: right;
             width: 38%;
             height: 8vw;
             line-height: 8vw;
@@ -128,7 +129,7 @@ export default {
             text-align: center;
             background-image: url(../../../../../assets/img/category/yhj.png);
             background-size: 100% 100%;
-            margin-left: 10%;
+            margin-right: 6%;
             margin-top: -1vw;
           }
         }
